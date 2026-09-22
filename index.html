@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fresher Interview Kit</title>
+<meta name="description" content="Fresher-level (CS/IT/ECE/EC) technical interview scorecard and question bank.">
+<meta name="theme-color" content="#4338ca">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#161a2e; --muted:#5b6488; --paper:#eef0f9; --panel:#ffffff;
+    --line:#d9deee; --line-soft:#e7eaf6;
+    --accent:#4338ca; --accent-ink:#332a99; --accent-soft:#e7e5fb;
+    --band1:#be3455; --band1-soft:#f7e2e7; --band2:#b8791f; --band2-soft:#f6ecd9;
+    --band3:#0d7a8c; --band3-soft:#dcf0f3; --band4:#147a5c; --band4-soft:#dcf2ea;
+    --band5:#4338ca; --band5-soft:#e7e5fb;
+    --code-bg:#11142a; --code-ink:#e6e8f7;
+    --focus:#0d7a8c;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#e6e8f7; --muted:#9aa3c4; --paper:#0b0d1c; --panel:#141830;
+      --line:#2a2f52; --line-soft:#1d2140;
+      --accent:#8b7ff5; --accent-ink:#d6d2fa; --accent-soft:#241f47;
+      --band1:#ea7d91; --band1-soft:#3a1c26; --band2:#dba53f; --band2-soft:#332714;
+      --band3:#4fc7dc; --band3-soft:#123138; --band4:#3fc99a; --band4-soft:#0f2e26;
+      --band5:#8b7ff5; --band5-soft:#241f47;
+      --code-bg:#0a0c1a; --code-ink:#e2e5f7;
+      --focus:#4fc7dc;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#e6e8f7; --muted:#9aa3c4; --paper:#0b0d1c; --panel:#141830;
+    --line:#2a2f52; --line-soft:#1d2140;
+    --accent:#8b7ff5; --accent-ink:#d6d2fa; --accent-soft:#241f47;
+    --band1:#ea7d91; --band1-soft:#3a1c26; --band2:#dba53f; --band2-soft:#332714;
+    --band3:#4fc7dc; --band3-soft:#123138; --band4:#3fc99a; --band4-soft:#0f2e26;
+    --band5:#8b7ff5; --band5-soft:#241f47;
+    --code-bg:#0a0c1a; --code-ink:#e2e5f7;
+    --focus:#4fc7dc;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;font-family:"Public Sans","Segoe UI",Arial,sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;}
+  a{color:var(--accent);}
+  :focus-visible{outline:2px solid var(--focus);outline-offset:2px;}
+  h1,h2,h3{font-family:"Barlow Condensed","Segoe UI",Arial,sans-serif;text-wrap:balance;}
+
+  header{
+    background:var(--ink); color:var(--paper); padding:30px 20px 26px;
+    border-bottom:3px solid var(--accent); position:relative;
+  }
+  header::after{
+    content:""; position:absolute; left:0; right:0; bottom:-3px; height:3px;
+    background:repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 14px);
+    opacity:.55;
+  }
+  header .eyebrow{
+    font-family:"JetBrains Mono",monospace; font-size:.72rem; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); opacity:.9; margin:0 0 8px;
+  }
+  header h1{margin:0 0 8px;font-size:2rem;font-weight:700;letter-spacing:.01em;color:#fff;}
+  header p{margin:0;opacity:.82;font-size:.95rem;max-width:62ch;}
+
+  main{max-width:980px;margin:0 auto;padding:26px 20px 80px;}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px 24px;margin-bottom:24px;}
+  h2.section-title{font-size:1.5rem;font-weight:600;margin:0 0 4px;color:var(--ink);letter-spacing:.01em;}
+  .blurb{color:var(--muted);font-size:.92rem;margin:0 0 18px;max-width:68ch;}
+
+  table.score{width:100%;border-collapse:collapse;font-size:.95rem;}
+  tfoot td{font-weight:600;background:var(--accent-soft);border:1px solid var(--line);padding:10px 14px;font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums;color:var(--accent-ink);}
+
+  details.q{border:1px solid var(--line);border-radius:8px;margin-bottom:10px;overflow:hidden;background:var(--panel);}
+  details.q summary{cursor:pointer;padding:11px 14px;font-weight:600;background:var(--line-soft);list-style:none;}
+  details.q summary::-webkit-details-marker{display:none;}
+  details.q summary::before{content:"▸ ";color:var(--accent);}
+  details.q[open] summary::before{content:"▾ ";}
+  details.q .answer{padding:4px 16px 16px;color:var(--ink);}
+  details.q .answer p{margin:8px 0;}
+  details.q .answer pre{background:var(--code-bg);color:var(--code-ink);padding:13px 14px;border-radius:6px;overflow-x:auto;font-size:.84rem;font-family:"JetBrains Mono",monospace;line-height:1.5;}
+  details.q .answer code{background:var(--line-soft);padding:1px 5px;border-radius:4px;font-size:.88em;font-family:"JetBrains Mono",monospace;}
+
+  .level{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:.68rem;font-weight:600;letter-spacing:.04em;padding:2px 8px;border-radius:999px;margin-left:8px;vertical-align:middle;white-space:nowrap;}
+  .level.l1{background:var(--band4-soft);color:var(--band4);}
+  .level.l2{background:var(--band2-soft);color:var(--band2);}
+  .level.l3{background:var(--band5-soft);color:var(--band5);}
+
+  .rubric{background:var(--band3-soft);border-left:3px solid var(--band3);padding:11px 14px;border-radius:0 6px 6px 0;font-size:.92rem;margin-top:8px;}
+
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+  .toc a{background:var(--panel);border:1px solid var(--line);color:var(--ink);text-decoration:none;padding:6px 13px;border-radius:999px;font-size:.83rem;font-weight:500;transition:border-color .15s,color .15s;}
+  .toc a:hover{border-color:var(--accent);color:var(--accent);}
+
+  .crit{border:1px solid var(--line);border-radius:8px;margin-bottom:12px;overflow:hidden;}
+  .crit-head{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--line-soft);border-bottom:1px solid var(--line);}
+  .crit-num{background:var(--ink);color:var(--paper);font-family:"JetBrains Mono",monospace;font-weight:600;font-size:.8rem;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;}
+  .crit-name{font-weight:600;flex:1;}
+  .crit-head input{
+    width:56px;padding:5px 4px;border:1px solid var(--line);border-radius:5px;
+    font-family:"JetBrains Mono",monospace;font-size:.95rem;font-variant-numeric:tabular-nums;
+    text-align:center;background:var(--panel);color:var(--ink);
+  }
+  .crit-head input:focus-visible{border-color:var(--focus);}
+  .crit-head > span:last-child{font-family:"JetBrains Mono",monospace;font-size:.78rem;color:var(--muted);}
+
+  .anchors{padding:4px 0;font-size:.85rem;color:var(--muted);}
+  .anchors div{margin:0;padding:7px 14px 7px 12px;border-left:3px solid transparent;}
+  .anchors b{color:var(--ink);font-family:"JetBrains Mono",monospace;font-weight:600;font-size:.82em;}
+  .anchors div:nth-child(1){border-left-color:var(--band1);background:var(--band1-soft);}
+  .anchors div:nth-child(2){border-left-color:var(--band2);background:var(--band2-soft);}
+  .anchors div:nth-child(3){border-left-color:var(--band3);background:var(--band3-soft);}
+  .anchors div:nth-child(4){border-left-color:var(--band4);background:var(--band4-soft);}
+  .anchors div:nth-child(5){border-left-color:var(--band5);background:var(--band5-soft);}
+  .anchors div + div{border-top:1px solid var(--paper);}
+
+  .dept-title{
+    margin:24px 0 10px;font-size:1.05rem;font-weight:600;color:var(--accent);
+    border-bottom:1px solid var(--line);padding-bottom:6px;
+  }
+  .dept-title:first-of-type{margin-top:4px;}
+  .dept-title small{display:block;font-family:"Public Sans",sans-serif;font-weight:400;color:var(--muted);font-size:.78rem;margin-top:2px;}
+
+  /* --- router pages --- */
+  .page{display:none;}
+  .page.active{display:block;}
+
+  /* --- home page cards --- */
+  .home-title{font-size:1.15rem;font-weight:600;color:var(--muted);margin:0 0 14px;text-transform:uppercase;letter-spacing:.06em;font-family:"JetBrains Mono",monospace;font-size:.78rem;}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;}
+  .card-link{
+    display:flex;flex-direction:column;gap:6px;background:var(--panel);border:1px solid var(--line);
+    border-radius:10px;padding:16px 18px;text-decoration:none;color:var(--ink);
+    transition:border-color .15s,transform .15s;
+  }
+  .card-link:hover{border-color:var(--accent);transform:translateY(-1px);}
+  .card-link .card-num{
+    font-family:"JetBrains Mono",monospace;font-size:.75rem;font-weight:600;color:var(--accent);
+  }
+  .card-link .card-name{font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:1.15rem;line-height:1.2;}
+  .card-link .card-sub{color:var(--muted);font-size:.82rem;}
+  .card-link.scorecard-card{background:var(--accent-soft);border-color:var(--accent);}
+
+  /* --- back link on content pages --- */
+  .back-link{
+    display:inline-flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;
+    font-size:.85rem;font-weight:500;margin-bottom:16px;
+  }
+  .back-link:hover{color:var(--accent);}
+
+  /* --- floating action buttons --- */
+  .fabs{position:fixed;right:20px;bottom:20px;display:flex;flex-direction:column;gap:10px;z-index:40;}
+  .fab{
+    width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;font-size:1.15rem;cursor:pointer;
+    box-shadow:0 2px 8px rgba(0,0,0,.12);position:relative;
+  }
+  .fab:hover{border-color:var(--accent);color:var(--accent);}
+  .fab .tooltip{
+    position:absolute;right:54px;top:50%;transform:translateY(-50%);background:var(--ink);color:var(--paper);
+    font-size:.75rem;padding:4px 9px;border-radius:5px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .12s;
+  }
+  .fab:hover .tooltip{opacity:1;}
+
+  /* --- print menu --- */
+  .print-menu{
+    position:fixed;right:74px;bottom:20px;background:var(--panel);border:1px solid var(--line);border-radius:8px;
+    box-shadow:0 4px 14px rgba(0,0,0,.15);display:none;flex-direction:column;overflow:hidden;z-index:41;min-width:170px;
+  }
+  .print-menu.open{display:flex;}
+  .print-menu button{
+    background:none;border:none;text-align:left;padding:11px 14px;font-size:.88rem;color:var(--ink);cursor:pointer;font-family:inherit;
+  }
+  .print-menu button:hover{background:var(--line-soft);color:var(--accent);}
+  .print-menu button + button{border-top:1px solid var(--line);}
+
+  /* --- search overlay --- */
+  .search-overlay{
+    position:fixed;inset:0;background:rgba(10,15,22,.55);display:none;align-items:flex-start;justify-content:center;
+    padding-top:10vh;z-index:50;
+  }
+  .search-overlay.open{display:flex;}
+  .search-box{background:var(--panel);border-radius:12px;width:min(560px,90vw);max-height:70vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.35);}
+  .search-box input{
+    border:none;border-bottom:1px solid var(--line);padding:16px 18px;font-size:1.05rem;font-family:inherit;
+    background:var(--panel);color:var(--ink);outline:none;
+  }
+  .search-results{overflow-y:auto;padding:6px;}
+  .search-result{display:block;padding:10px 12px;border-radius:7px;text-decoration:none;color:var(--ink);}
+  .search-result:hover, .search-result.sel{background:var(--line-soft);}
+  .search-result .sr-page{font-family:"JetBrains Mono",monospace;font-size:.7rem;color:var(--accent);text-transform:uppercase;letter-spacing:.04em;}
+  .search-empty{padding:20px 14px;color:var(--muted);font-size:.9rem;}
+
+  @media print{
+    header{background:#fff;color:#000;border-bottom:2px solid #000;}
+    header::after{display:none;}
+    header h1{color:#000;}
+    .fabs, .print-menu, .search-overlay, .back-link{display:none !important;}
+    details.q{page-break-inside:avoid;}
+    details.q:not([open]) summary::before{content:"Q: ";}
+    body{background:#fff;}
+    .panel{border:none;padding:0;margin-bottom:18px;}
+    body.print-all .page{display:block !important;}
+    .page:not(.active):not(#page-home){display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Fresher Technical Interview</p>
+  <h1>Interview Kit — CS / IT / ECE / EC</h1>
+  <p>Behavioural-anchor scorecard and fresher-level question bank for all 10 evaluation criteria, with click-to-reveal answers.</p>
+</header>
+
+<main>
+
+  <div class="page" id="page-home">
+    <p class="home-title">Sections</p>
+    <div class="card-grid">
+      <a class="card-link scorecard-card" href="#scorecard"><span class="card-num">&#9733;</span><span class="card-name">Scorecard</span><span class="card-sub">Live marks + behavioural anchors</span></a>
+      <a class="card-link" href="#c1"><span class="card-num">01</span><span class="card-name">Communication Skills</span><span class="card-sub">Behavioral prompts + rubric</span></a>
+      <a class="card-link" href="#c2"><span class="card-num">02</span><span class="card-name">Department Basics</span><span class="card-sub">Split by CS / IT / ECE / EC</span></a>
+      <a class="card-link" href="#c3"><span class="card-num">03</span><span class="card-name">Tech Know-How</span><span class="card-sub">Practical tech awareness</span></a>
+      <a class="card-link" href="#c4"><span class="card-num">04</span><span class="card-name">Network Fundamentals</span><span class="card-sub">OSI, TCP/UDP, DNS + satellite PEP</span></a>
+      <a class="card-link" href="#c5"><span class="card-num">05</span><span class="card-name">Latest Trends</span><span class="card-sub">AI, DevOps, 5G, O-RAN/NTN</span></a>
+      <a class="card-link" href="#c6"><span class="card-num">06</span><span class="card-name">Programming Skills</span><span class="card-sub">Deep Q&amp;A, Level 1 &rarr; 3</span></a>
+      <a class="card-link" href="#ds"><span class="card-num">&#9998;</span><span class="card-name">Data Structures</span><span class="card-sub">Bonus section, pairs with Programming Skills</span></a>
+      <a class="card-link" href="#c7"><span class="card-num">07</span><span class="card-name">Coding Style &amp; Optimization</span><span class="card-sub">Readability, DRY, complexity</span></a>
+      <a class="card-link" href="#c8"><span class="card-num">08</span><span class="card-name">Logical Thinking</span><span class="card-sub">Aptitude puzzles + answers</span></a>
+      <a class="card-link" href="#c9"><span class="card-num">09</span><span class="card-name">Career Aspirations</span><span class="card-sub">Motivation &amp; goals rubric</span></a>
+      <a class="card-link" href="#c10"><span class="card-num">10</span><span class="card-name">Candidate Questions</span><span class="card-sub">Evaluating their questions</span></a>
+    </div>
+  </div>
+
+  <div class="page" id="page-scorecard">
+  <a class="back-link" href="#home">&larr; Home</a>
+  <section class="panel" id="scorecard">
+    <h2 class="section-title">Interview Scorecard</h2>
+    <p class="blurb">Scoring guidelines with behavioural anchors — fill in marks live during the interview, total updates automatically.</p>
+
+    <div class="crit">
+      <div class="crit-head"><span class="crit-num">1</span><span class="crit-name">Communication Skills</span><input type="number" min="0" max="10" class="mark"><span>/10</span></div>
+      <div class="anchors">
+        <div><b>2–3:</b> Mumbles, poor articulation, frequent filler words ("um", "like"), unable to structure thoughts.</div>
+        <div><b>4–5:</b> Basic clarity but monotonous, repetitive, or overly technical jargon without context.</div>
+        <div><b>6–7:</b> Clear, confident, good pace; minor lapses in grammar/structure.</div>
+        <div><b>8–9:</b> Articulate, engaging, adapts language to audience (technical vs. non-tech); uses examples effectively.</div>
+        <div><b>10:</b> Exceptional storyteller; concise, persuasive, and culturally nuanced (handles English seamlessly).</div>
+      </div>
+    </div>
+
+    <div class="crit">
+      <div class="crit-head"><span class="crit-num">2</span><span class="crit-name">Understanding of Department Basics</span><input type="number" min="0" max="10" class="mark"><span>/10</span></div>
+      <div class="anchors">
+        <div><b>2–3:</b> Cannot explain fundamental concepts (e.g., OS processes, DBMS normalization, or Fourier transform).</div>
+        <div><b>4–5:</b> Recalls definitions but confuses basics (e.g., heap vs. stack, amplitude vs. phase modulation).</div>
+        <div><b>6–7:</b> Correctly explains 2–3 core topics (e.g., deadlock conditions, TCP handshake, or Nyquist theorem).</div>
+        <div><b>8–9:</b> Demonstrates solid grasp with examples (e.g., ACID properties with scenario, OFDM vs. CDMA).</div>
+        <div><b>10:</b> Connects fundamentals to real-world systems (e.g., cache coherence in multi-core, Doppler in LEO comms).</div>
+      </div>
+    </div>
+
+    <div class="crit">
+      <div class="crit-head"><span class="crit-num">3</span><span class="crit-name">Knowledge of Technology Know-How</span><input type="number" min="0" max="10" class="mark"><span>/10</span></div>
+      <div class="anchors">
+        <div><b>2–3:</b> No exposure beyond syllabus; cannot name tools/frameworks used in industry.</div>
+        <div><b>4–5:</b> Lists popular tools (Python, Docker) but no practical context.</div>
+        <div><b>6–7:</b> Explains 1–2 tools with basic use cases (e.g., Wireshark for packet analysis).</div>
+        <div><b>8–9:</b> Demonstrates hands-on use (e.g., built a REST API with Flask + Dockerized it).</div>
+        <div><b>10:</b> Shows advanced application (e.g., optimized TCP for high-latency satellite links).</div>
+      </div>
+    </div>
+
+    <div class="crit">
+      <div class="crit-head"><span class="crit-num">4</span><span class="crit-name">Network Fundamentals</span><input type="number" min="0" max="10" class="mark"><span>/10</span></div>
+      <div class="anchors">
+        <div><b>2–3:</b> Cannot explain OSI model or difference between switch/router.</div>
+        <div><b>4–5:</b> Recalls definitions but confuses layers (e.g., IP at Layer 2).</div>
+        <div><b>6–7:</b> Correctly maps protocols to layers; explains subnetting basics.</div>
+        <div><b>8–9:</b> Solves subnetting/CIDR problems; discusses VLANs, QoS, or BGP basics.</div>
+        <div><b>10:</b> Applies concepts to satellite scenarios (e.g., PEP, SCPS-TP, beam handover).</div>
+      </div>
+    </div>
+
+    <div class="crit">
+      <div class="crit-head"><span class="crit-num">5</span><span class="crit-name">Knowledge of Latest Trends in Technology</span><input type="number" min="0" max="10" class="mark"><span>/10</span></div>
+      <div class="anchors">
+        <div><b>2–3:</b> Unaware of trends (5G, SDN, AI/ML in networking).</div>
+        <div><b>4–5:</b> Mentions buzzwords without context (e.g., "I heard of Kubernetes").</div>
+        <div><b>6–7:</b> Explains 1–2 trends with basic relevance to the company's domain (e.g., SDN for ground networks).</div>
+        <div><b>8–9:</b> Links trends to satellite industry (e.g., O-RAN, NTN in 3GPP Rel-17).</div>
+        <div><b>10:</b> Proposes innovative application (e.g., ML-based congestion control for LEO).</div>
+      </div>
+    </div>
+
+    <div class="crit">
+      <div class="crit-head"><span class="crit-num">6</span><span class="crit-name">Programming Skills</span><input type="number" min="0" max="10" class="mark"><span>/10</span></div>
+      <div class="anchors">
+        <div><b>2–3:</b> Syntax errors in basic programs; cannot write loops/conditionals.</div>
+        <div><b>4–5:</b> Writes correct but inefficient code (e.g., O(n²) for simple tasks).</div>
+        <div><b>6–7:</b> Clean, functional code in Python/C++; handles edge cases.</div>
+        <div><b>8–9:</b> Uses appropriate data structures (e.g., hash maps for IP lookup).</div>
+        <div><b>10:</b> Elegant, modular code with comments and error handling.</div>
+      </div>
+    </div>
+
+    <div class="crit">
+      <div class="crit-head"><span class="crit-num">7</span><span class="crit-name">Coding Styles and Optimized Coding</span><input type="number" min="0" max="10" class="mark"><span>/10</span></div>
+      <div class="anchors">
+        <div><b>2–3:</b> No indentation, cryptic variable names, no comments.</div>
+        <div><b>4–5:</b> Basic PEP-8 compliance but inconsistent; no optimization.</div>
+        <div><b>6–7:</b> Follows style guide; reduces time/space complexity (e.g., O(n) vs. O(n²)).</div>
+        <div><b>8–9:</b> Uses design patterns (e.g., singleton for config); profiles code.</div>
+        <div><b>10:</b> Industry-grade: linted, unit-tested, and optimized for satellite constraints (low memory).</div>
+      </div>
+    </div>
+
+    <div class="crit">
+      <div class="crit-head"><span class="crit-num">8</span><span class="crit-name">Logical Thinking and Reasoning</span><input type="number" min="0" max="10" class="mark"><span>/10</span></div>
+      <div class="anchors">
+        <div><b>2–3:</b> Cannot solve simple puzzles (e.g., fizz-buzz, array rotation).</div>
+        <div><b>4–5:</b> Solves with guidance; misses edge cases.</div>
+        <div><b>6–7:</b> Independently solves medium-level problems (e.g., two-pointer technique).</div>
+        <div><b>8–9:</b> Breaks down complex problems; explains trade-offs.</div>
+        <div><b>10:</b> Innovative approach; debugs logically under time pressure.</div>
+      </div>
+    </div>
+
+    <div class="crit">
+      <div class="crit-head"><span class="crit-num">9</span><span class="crit-name">Career Aspirations and Long-Term Goals</span><input type="number" min="0" max="10" class="mark"><span>/10</span></div>
+      <div class="anchors">
+        <div><b>2–3:</b> No clarity; "I just want a job".</div>
+        <div><b>4–5:</b> Generic goals ("growth", "learning") without a company-specific link.</div>
+        <div><b>6–7:</b> Aligns with the company's mission (e.g., "contribute to global connectivity").</div>
+        <div><b>8–9:</b> Specific 3–5 year plan (e.g., "move from ground software to payload engineering").</div>
+        <div><b>10:</b> Passionate, research-backed interest in the company's flagship projects and initiatives.</div>
+      </div>
+    </div>
+
+    <div class="crit">
+      <div class="crit-head"><span class="crit-num">10</span><span class="crit-name">Candidate Questions</span><input type="number" min="0" max="10" class="mark"><span>/10</span></div>
+      <div class="anchors">
+        <div><b>2–3:</b> No questions or irrelevant ("salary?", "WFH?").</div>
+        <div><b>4–5:</b> Asks 1 generic question.</div>
+        <div><b>6–7:</b> Asks 1–2 thoughtful questions (e.g., "How does the team handle link asymmetry?").</div>
+        <div><b>8–9:</b> Multiple insightful questions showing research (e.g., "How is AI used in beam scheduling?").</div>
+        <div><b>10:</b> Questions reveal deep preparation and genuine curiosity about role impact.</div>
+      </div>
+    </div>
+
+    <table class="score" style="margin-top:10px;">
+      <tfoot><tr><td style="font-weight:600;">Total</td><td id="total" style="width:130px;">0 / 100</td></tr></tfoot>
+    </table>
+    <p class="blurb" style="margin-top:12px;">Feedback or notes if any: ____________________________________________</p>
+  </section>
+  </div>
+
+  <!-- 1. COMMUNICATION SKILLS -->
+  <div class="page" id="page-c1">
+  <a class="back-link" href="#home">&larr; Home</a>
+  <section class="panel" id="c1">
+    <h2 class="section-title">1. Communication Skills</h2>
+    <p class="blurb">Behavioral — assess clarity, structure, and ability to explain technical ideas simply. No single "correct" answer; use the rubric.</p>
+
+    <details class="q"><summary>Tell me about yourself. <span class="level l1">Level 1</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> concise (60–90 sec), structured (background → skills → project → why this role), no rambling, confident tone, tailored to the role rather than reciting the resume verbatim.</div>
+    </div></details>
+
+    <details class="q"><summary>Explain your final-year / major project to someone with no technical background. <span class="level l1">Level 1</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> avoids jargon, uses an analogy or real-world framing, explains the "why" (problem solved) before the "how" (tech used). A candidate who can't simplify likely doesn't fully understand their own project.</div>
+    </div></details>
+
+    <details class="q"><summary>Describe a time you had to explain a technical problem to a non-technical teammate or professor. <span class="level l1">Level 1</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> specific example (STAR format: Situation, Task, Action, Result), evidence of adapting language to audience.</div>
+    </div></details>
+
+    <details class="q"><summary>How do you handle disagreement with a team member on a technical approach? <span class="level l1">Level 1</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> listens before arguing, uses data/reasoning not ego, willing to compromise or defer to evidence.</div>
+    </div></details>
+
+    <details class="q"><summary>Give a short one-minute summary: what makes a good team player, in your view? <span class="level l1">Level 1</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> ability to organize thoughts on the spot, coherent structure under mild pressure — this is really testing spontaneous communication, not the content itself.</div>
+    </div></details>
+    <details class="q"><summary>What would you do if you didn't understand a question during this interview? <span class="level l2">Level 2</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> asks for clarification confidently rather than guessing or freezing; a sign of maturity, not weakness.</div>
+    </div></details>
+
+    <details class="q"><summary>How would you convince a skeptical teammate to adopt a new tool or process? <span class="level l2">Level 2</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> leads with reasoning/evidence (not authority), listens to objections, proposes a low-risk trial rather than forcing adoption.</div>
+    </div></details>
+
+    <details class="q"><summary>Describe your ideal working style — do you prefer written or verbal communication, and why? <span class="level l2">Level 2</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> self-awareness, and a sensible reason (e.g. "written for anything needing a record, verbal for fast back-and-forth") rather than a one-size-fits-all answer.</div>
+    </div></details>
+
+    <details class="q"><summary>How do you give constructive feedback on a peer's code or work? <span class="level l2">Level 2</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> specific and actionable (not just "this is wrong"), focuses on the work not the person, balances critique with what worked.</div>
+    </div></details>
+
+    <details class="q"><summary>Tell me about a group project — what was your specific role? <span class="level l2">Level 2</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> a concrete, ownable contribution (not "we all did everything together"), credit given to teammates where due.</div>
+    </div></details>
+
+    <details class="q"><summary>How do you handle receiving criticism about your work? <span class="level l3">Level 3</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> non-defensive, treats it as information not attack, gives a real example rather than a rehearsed platitude.</div>
+    </div></details>
+
+    <details class="q"><summary>Explain a technical concept you learned recently, as if to a 10-year-old. <span class="level l3">Level 3</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> genuine simplification with an analogy, not just talking slower/louder with the same jargon.</div>
+    </div></details>
+
+    <details class="q"><summary>What would you do if you disagreed with your manager's technical decision? <span class="level l3">Level 3</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> raises the concern respectfully with reasoning, accepts the final call once made (disagree-and-commit), doesn't just go along silently or escalate immediately.</div>
+    </div></details>
+
+    <details class="q"><summary>How do you make sure your emails or chat messages are clear and unambiguous? <span class="level l3">Level 3</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> structuring the message (context → ask → deadline), reading it back before sending, awareness that tone is easy to misread in text.</div>
+    </div></details>
+
+    <details class="q"><summary>Describe a situation where communication broke down in a team, and how it was resolved. <span class="level l3">Level 3</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> a specific real example, identifies the root cause (assumption, missing update, unclear ownership), and a concrete fix rather than a vague "we talked it out."</div>
+    </div></details>
+
+  </section>
+  </div>
+
+  <!-- 2. DEPARTMENT BASICS -->
+  <div class="page" id="page-c2">
+  <a class="back-link" href="#home">&larr; Home</a>
+  <section class="panel" id="c2">    <h3 class="dept-title">Computer Science (CS)<small>Theory, OS, compilers</small></h3>
+
+    <details class="q"><summary>What is the difference between compiler and interpreter? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>A <strong>compiler</strong> translates the entire source code into machine code (or intermediate code) before execution, producing a standalone executable — errors are caught at compile time, and execution is generally faster (e.g. C, C++). An <strong>interpreter</strong> translates and executes code line-by-line at runtime, without producing a separate executable — easier to debug interactively, but generally slower (e.g. Python, JavaScript). Java is a hybrid: compiled to bytecode, then interpreted/JIT-compiled by the JVM.</p>
+    </div></details>
+
+    <details class="q"><summary>What is a process, and what are the typical process states in an OS? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>A process is a program in execution, with its own memory, registers, and execution context. Typical states: <strong>New</strong> (being created) → <strong>Ready</strong> (waiting for CPU) → <strong>Running</strong> (executing) → <strong>Waiting/Blocked</strong> (waiting on I/O or an event) → <strong>Terminated</strong>. The OS scheduler moves processes between Ready and Running.</p>
+    </div></details>
+
+    <details class="q"><summary>What is deadlock? What are the four necessary conditions for it to occur? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>A state where two or more processes are stuck waiting on each other indefinitely, each holding a resource the other needs. Four necessary conditions (Coffman conditions): <strong>Mutual Exclusion</strong> (resource held exclusively), <strong>Hold and Wait</strong> (holding one resource while waiting for another), <strong>No Preemption</strong> (resources can't be forcibly taken), and <strong>Circular Wait</strong> (a closed chain of processes each waiting on the next). All four must hold simultaneously for deadlock to occur.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between a compiler error and a runtime error? Give an example of each. <span class="level l1">Level 1</span></summary><div class="answer">
+      <p><strong>Compile-time error:</strong> caught before the program runs — e.g. missing semicolon, type mismatch, undeclared variable. <strong>Runtime error:</strong> occurs during execution — e.g. division by zero, null pointer dereference, array index out of bounds.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the binary number system, and why do computers use it? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>A base-2 number system using only 0 and 1. Computers use it because digital circuits are built from transistors that naturally represent two stable states (on/off, high/low voltage) — binary maps directly onto that physical reality, making it simple and reliable to represent and process.</p>
+    </div></details>
+
+    <details class="q"><summary>What is cache coherence, and why does it matter in a multi-core system? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>When multiple CPU cores each have their own cache but share main memory, cache coherence ensures every core sees a consistent, up-to-date view of shared data — so if one core updates a value, other cores' cached copies aren't silently stale. Protocols like MESI (Modified/Exclusive/Shared/Invalid) manage this. Without it, cores could compute with outdated data, causing subtle correctness bugs in multi-threaded programs.</p>
+    </div></details>
+
+
+    <details class="q"><summary>What is virtual memory, and why is it used? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>An abstraction that gives each process the illusion of a large, contiguous, private address space, backed by a combination of RAM and disk. It lets programs use more memory than physically installed, isolates processes from each other, and simplifies memory management via paging.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between a system call and a library function call? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A <strong>system call</strong> requests a service directly from the OS kernel (e.g. reading a file, creating a process) and involves a switch from user mode to kernel mode. A <strong>library function call</strong> executes entirely in user space (e.g. a math function) — some library functions internally wrap a system call, but many don't.</p>
+    </div></details>
+
+    <details class="q"><summary>What is thrashing? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A condition where a system spends most of its time swapping pages in and out of memory (paging) rather than doing useful work, because too little physical memory is available for the active processes' working sets — throughput collapses even though the CPU/disk are extremely "busy."</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between paging and segmentation? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p><strong>Paging</strong> divides memory into fixed-size blocks (pages), simple to manage but doesn't align with logical program structure. <strong>Segmentation</strong> divides memory into variable-size, logically meaningful units (code segment, data segment, stack) — more intuitive but harder to manage (external fragmentation). Modern OSes typically use paging, sometimes combined with segmentation.</p>
+    </div></details>
+
+    <details class="q"><summary>What is a context switch? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>The process of saving the state (registers, program counter, etc.) of a currently running process/thread and loading the saved state of another, so the CPU can switch between them. It has overhead (time spent not doing useful work), so excessive context switching hurts performance.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the critical section problem, and how is it typically solved? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>The problem of ensuring that when multiple processes/threads access shared data, only one at a time executes the "critical section" that modifies it, to prevent race conditions. Solved using synchronization primitives like <strong>mutexes</strong> (mutual exclusion locks) or <strong>semaphores</strong>, which ensure only one thread enters the critical section at a time.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between a monolithic kernel and a microkernel? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>A <strong>monolithic kernel</strong> (e.g. Linux) runs most OS services — device drivers, file system, memory management — in kernel space as one large program, giving good performance but a larger attack/failure surface. A <strong>microkernel</strong> keeps only the bare minimum (IPC, basic scheduling, memory management) in kernel space, running other services in user space — more robust/modular but with communication overhead.</p>
+    </div></details>
+
+    <details class="q"><summary>What is starvation, and how is it different from deadlock? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>Starvation</strong> is when a process is perpetually denied the resources it needs (e.g. always losing out to higher-priority processes), even though the system as a whole keeps making progress. <strong>Deadlock</strong> is when processes are stuck waiting on each other and the system makes no progress at all. Starvation can happen without deadlock.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the purpose of a page table? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>It stores the mapping between virtual (logical) addresses used by a process and physical addresses in RAM, allowing the OS/MMU to translate every memory access. This is what makes virtual memory possible.</p>
+    </div></details>
+    <h3 class="dept-title">Information Technology (IT)<small>Databases, networks, dev process</small></h3>
+
+    <details class="q"><summary>Explain the phases of the Software Development Life Cycle (SDLC). <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>Requirement Analysis → Design → Implementation/Coding → Testing → Deployment → Maintenance. Some models (Agile) iterate through these in short cycles (sprints) rather than once linearly (Waterfall).</p>
+    </div></details>
+
+    <details class="q"><summary>What is database normalization, and why do we do it? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>The process of organizing tables to reduce data redundancy and avoid update/insert/delete anomalies, typically by progressing through normal forms (1NF removes repeating groups, 2NF removes partial dependencies, 3NF removes transitive dependencies). Done so that updating a piece of data means changing it in exactly one place, not hunting down duplicates scattered across the database.</p>
+    </div></details>
+
+    <details class="q"><summary>What are the ACID properties of a database transaction? Give a scenario. <span class="level l1">Level 1</span></summary><div class="answer">
+      <p><strong>Atomicity</strong> (all-or-nothing — the transaction fully completes or fully rolls back), <strong>Consistency</strong> (moves the database from one valid state to another, respecting constraints), <strong>Isolation</strong> (concurrent transactions don't interfere with each other), <strong>Durability</strong> (once committed, changes survive a crash). Scenario: a bank transfer debits one account and credits another — atomicity ensures both happen or neither does, so money is never lost mid-transfer if the system crashes partway.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the TCP three-way handshake? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>The process TCP uses to establish a connection: <strong>SYN</strong> (client sends a synchronize request) → <strong>SYN-ACK</strong> (server acknowledges and sends its own synchronize request) → <strong>ACK</strong> (client acknowledges) — after this, both sides have confirmed they can send and receive, and data transfer begins.</p>
+    </div></details>
+
+    <details class="q"><summary>What is an IDE, and name two examples. <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>An Integrated Development Environment bundles a code editor, compiler/interpreter, and debugger (often with version control integration) into one application, streamlining development. Examples: Visual Studio Code, IntelliJ IDEA, Eclipse, PyCharm.</p>
+    </div></details>
+
+    <details class="q"><summary>What is version control, and why is it important? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A system that tracks changes to files over time, allowing multiple people to collaborate, revert to previous states, and manage parallel lines of work (branches). Important because it prevents lost work, enables collaboration without overwriting others' changes, and provides an audit trail. Git is the dominant example.</p>
+    </div></details>
+
+
+    <details class="q"><summary>What is a foreign key, and why is it used? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A column (or set of columns) in one table that references the primary key of another table, enforcing referential integrity — e.g. an <code>orders</code> table's <code>customer_id</code> referencing <code>customers.id</code>, ensuring you can't have an order for a customer that doesn't exist.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between a primary key and a unique key? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>Both enforce uniqueness, but a table can have only <strong>one primary key</strong> (which also disallows NULLs and is typically used for foreign key references), while it can have <strong>multiple unique keys</strong>, which can allow a NULL value (depending on the database).</p>
+    </div></details>
+
+    <details class="q"><summary>What is indexing in a database, and why does it speed up queries? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>An index is a separate data structure (commonly a B-tree) built on one or more columns that lets the database find matching rows without scanning the entire table — similar to a book's index letting you jump to a page instead of reading cover to cover. Speeds up reads (especially <code>WHERE</code>/<code>JOIN</code> lookups) at the cost of extra storage and slower writes (the index must be updated too).</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between a JOIN and a subquery? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A <strong>JOIN</strong> combines rows from two or more tables based on a related column in a single query step, generally well-optimized by the database engine. A <strong>subquery</strong> nests one query inside another (e.g. in a <code>WHERE</code> clause) — sometimes more readable for certain logic, but can be less efficient than an equivalent JOIN depending on the query planner.</p>
+    </div></details>
+
+    <details class="q"><summary>What is load balancing? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>Distributing incoming requests/traffic across multiple servers so no single server is overwhelmed, improving reliability (if one server fails, others handle the load) and performance. Common strategies: round-robin, least-connections, IP hash.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between vertical and horizontal scaling? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>Vertical scaling (scale up):</strong> adding more resources (CPU/RAM) to a single machine — simple but has a hard ceiling and a single point of failure. <strong>Horizontal scaling (scale out):</strong> adding more machines and distributing load across them — more complex (needs load balancing, often stateless design) but scales much further and is more fault-tolerant.</p>
+    </div></details>
+
+    <details class="q"><summary>What is a CDN, and why is it used? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>A Content Delivery Network is a geographically distributed network of servers that cache and serve content (images, videos, static files) from a location physically closer to the user, reducing latency and offloading traffic from the origin server.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between the HTTP GET and POST methods? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>GET</strong> requests data, parameters are visible in the URL, is idempotent (repeating it has no extra effect) and cacheable — used for retrieving resources. <strong>POST</strong> submits data to be processed (e.g. form submission), data is sent in the request body (not the URL), is not idempotent by convention, and is used for creating/changing resources.</p>
+    </div></details>
+
+    <details class="q"><summary>What is a microservice architecture? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>Structuring an application as a collection of small, independently deployable services, each responsible for a specific business capability and communicating over the network (often HTTP/REST or messaging) — as opposed to a single monolithic codebase. Enables independent scaling/deployment per service, at the cost of added operational complexity (network calls, distributed data, service discovery).</p>
+    </div></details>
+    <h3 class="dept-title">Electronics &amp; Communication Engineering (ECE)<small>Signal &amp; communication systems</small></h3>
+
+    <details class="q"><summary>What is the Nyquist theorem, and why does it matter? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>To perfectly reconstruct a signal from its samples without aliasing, the sampling rate must be at least <strong>twice the highest frequency</strong> present in the signal (the Nyquist rate). Undersampling below this causes aliasing — higher frequencies get misrepresented as lower ones. It matters in any digital communication or audio system, including satellite payload signal processing, where sample rate must be chosen relative to the signal bandwidth.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between amplitude modulation and phase modulation? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p><strong>Amplitude Modulation (AM):</strong> the carrier signal's amplitude varies in proportion to the message signal, while frequency/phase stay constant — simple but more susceptible to noise. <strong>Phase Modulation (PM):</strong> the carrier's phase varies with the message signal while amplitude stays constant — more noise-resistant, used in digital modulation schemes (e.g. PSK) common in modern satellite/wireless links.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the Fourier transform used for? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>It converts a signal from the time domain into the frequency domain, revealing what frequency components make it up. Used throughout signal processing and communications: filtering, spectrum analysis, compression, modulation/demodulation, and analyzing bandwidth requirements for a satellite link.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between OFDM and CDMA? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p><strong>OFDM</strong> (Orthogonal Frequency-Division Multiplexing) splits a wide channel into many narrow, mutually-orthogonal subcarriers transmitted in parallel — highly resistant to multipath fading, used in Wi-Fi, LTE, DVB. <strong>CDMA</strong> (Code-Division Multiple Access) lets multiple users share the same frequency simultaneously, each distinguished by a unique spreading code — used in older cellular standards (e.g. IS-95, 3G CDMA2000). OFDM separates users/data in frequency+time; CDMA separates them in code space.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the Doppler effect, and why does it matter for LEO satellite communication? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>The apparent shift in a wave's frequency caused by relative motion between source and observer (higher frequency when approaching, lower when receding). LEO satellites move very fast relative to a ground terminal (several km/s), causing significant, rapidly-changing Doppler shift on the signal — receivers must continuously compensate for it (Doppler correction) to stay tuned to the correct frequency, unlike GEO satellites which are relatively stationary overhead.</p>
+    </div></details>
+
+
+    <details class="q"><summary>What is the difference between analog and digital modulation? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p><strong>Analog modulation</strong> varies a continuous carrier property (amplitude, frequency, or phase) in proportion to a continuous message signal (e.g. AM/FM radio). <strong>Digital modulation</strong> encodes discrete digital symbols onto the carrier (e.g. ASK, FSK, PSK, QAM) — generally more robust to noise and better suited to modern digital communication systems.</p>
+    </div></details>
+
+    <details class="q"><summary>What is bandwidth, and why does it matter in a communication system? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>The range of frequencies a signal or channel occupies/can carry, typically measured in Hz. It directly limits how much information (data rate) can be transmitted through a channel per unit time — higher bandwidth generally allows higher data rates (per the Shannon-Hartley theorem, alongside signal-to-noise ratio).</p>
+    </div></details>
+
+    <details class="q"><summary>What is noise figure, and why does it matter for a receiver? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A measure of how much a component (e.g. an amplifier) degrades the signal-to-noise ratio as a signal passes through it, compared to an ideal noiseless component. A lower noise figure in a receiver's front end is critical because it directly limits the weakest signal the system can reliably detect — especially important for satellite links with very weak received signals.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between baseband and passband signals? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A <strong>baseband</strong> signal occupies frequencies from (near) 0 Hz up to some maximum — its original, unmodulated form (e.g. raw audio). A <strong>passband</strong> signal has been shifted (modulated) onto a higher-frequency carrier, occupying a band around that carrier frequency — necessary for transmission over media like radio/satellite links, and to allow multiple signals to share the medium at different frequencies.</p>
+    </div></details>
+
+    <details class="q"><summary>What is multiplexing? Name two common types. <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>Combining multiple signals into one shared channel/medium for transmission, then separating them at the receiver. Common types: <strong>FDM</strong> (Frequency-Division Multiplexing — each signal gets a different frequency band), <strong>TDM</strong> (Time-Division Multiplexing — each signal gets a dedicated time slot), and <strong>CDM</strong> (Code-Division Multiplexing — each signal gets a unique code).</p>
+    </div></details>
+
+    <details class="q"><summary>What is a transponder, in the context of satellite communication? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>An onboard unit on a satellite that receives a signal (uplink) on one frequency, amplifies it, shifts it to a different frequency (to avoid interference with the incoming signal), and retransmits it back to Earth (downlink). A single satellite typically carries many transponders, each handling a portion of its total capacity.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between uplink and downlink? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>Uplink</strong> is the transmission path from a ground station/terminal up to the satellite. <strong>Downlink</strong> is the transmission path from the satellite back down to Earth. They typically use different frequency bands to avoid interference with each other.</p>
+    </div></details>
+
+    <details class="q"><summary>What is signal-to-noise ratio (SNR)? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>The ratio of desired signal power to background noise power, usually expressed in dB. A higher SNR means a cleaner signal that's easier to demodulate correctly; SNR directly affects the maximum achievable data rate and the bit error rate of a link.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between GEO, MEO, and LEO satellites? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>GEO</strong> (Geostationary, ~35,786 km): orbits match Earth's rotation, so the satellite appears stationary from the ground — wide coverage from one satellite, but high latency (~500-600ms round trip). <strong>MEO</strong> (Medium Earth Orbit, ~2,000-35,786 km): used e.g. by GPS satellites, moderate latency. <strong>LEO</strong> (Low Earth Orbit, ~160-2,000 km): low latency, but the satellite moves fast relative to the ground, so many satellites/frequent handovers are needed for continuous coverage.</p>
+    </div></details>
+
+    <details class="q"><summary>What is antenna gain? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>A measure of how effectively an antenna focuses/concentrates radio energy in a particular direction compared to a theoretical isotropic radiator (which radiates equally in all directions), expressed in dBi. Higher gain means a more focused beam — stronger signal in the intended direction, but a narrower coverage area that requires more precise pointing.</p>
+    </div></details>
+    <h3 class="dept-title">Electronics (EC)<small>Core circuits &amp; devices</small></h3>
+
+    <details class="q"><summary>State Ohm's Law. What does it tell you about the relationship between V, I, and R? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>V = I &times; R — voltage across a conductor is directly proportional to the current through it, for a constant resistance. It means: for a fixed resistance, increasing voltage increases current proportionally; for a fixed voltage, increasing resistance decreases current. Fundamental to analyzing any basic circuit.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between an analog signal and a digital signal? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>An <strong>analog</strong> signal is continuous in both time and amplitude — it can take any value within a range (e.g. a sound wave). A <strong>digital</strong> signal is discrete — represented as a sequence of distinct levels, typically binary (0/1) — obtained by sampling and quantizing an analog signal. Digital signals are more robust to noise and easier to process/store/transmit reliably.</p>
+    </div></details>
+
+    <details class="q"><summary>What is a semiconductor, and how does doping affect it? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>A material (e.g. silicon) with electrical conductivity between a conductor and an insulator, which can be precisely controlled — the basis of nearly all modern electronics. <strong>Doping</strong> introduces impurity atoms into the semiconductor lattice: <strong>n-type</strong> doping (e.g. phosphorus) adds extra free electrons (majority carriers), <strong>p-type</strong> doping (e.g. boron) creates "holes" (missing electrons, acting as positive charge carriers). Combining p-type and n-type regions creates a p-n junction — the basis of diodes and transistors.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the functional difference between a diode and a transistor? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>A <strong>diode</strong> is a two-terminal device that allows current to flow in essentially one direction only (used for rectification, protection). A <strong>transistor</strong> is a three-terminal device that can amplify a signal or act as an electronic switch — a small current/voltage at one terminal (base/gate) controls a much larger current between the other two (collector-emitter / drain-source).</p>
+    </div></details>
+
+    <details class="q"><summary>What are logic gates? Name the basic ones and what they do. <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>The fundamental building blocks of digital circuits, each implementing a basic Boolean operation on binary inputs. <strong>AND</strong> (output 1 only if all inputs are 1), <strong>OR</strong> (output 1 if any input is 1), <strong>NOT</strong> (inverts the input), <strong>NAND</strong>/<strong>NOR</strong> (AND/OR followed by NOT — each is "functionally complete," meaning any digital circuit can be built from NAND alone, or NOR alone), <strong>XOR</strong> (output 1 if inputs differ).</p>
+    </div></details>
+    <details class="q"><summary>State Kirchhoff's Current Law (KCL) and Voltage Law (KVL). <span class="level l2">Level 2</span></summary><div class="answer">
+      <p><strong>KCL:</strong> the sum of currents entering a node equals the sum of currents leaving it (charge is conserved at any junction). <strong>KVL:</strong> the sum of all voltages around any closed loop in a circuit equals zero (energy is conserved around a loop). Both follow from conservation laws and are the basis for analyzing any circuit.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between series and parallel circuits? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>In a <strong>series</strong> circuit, components are connected end-to-end so the same current flows through all of them, and voltage divides across them. In a <strong>parallel</strong> circuit, components are connected across the same two nodes, so the same voltage appears across all of them, and current divides between them.</p>
+    </div></details>
+
+    <details class="q"><summary>What is a capacitor, and what does it do in a circuit? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A passive component that stores energy in an electric field between two conductive plates separated by a dielectric. It resists sudden changes in voltage, charges/discharges over time, and is commonly used for filtering (smoothing power supply ripple), decoupling, and timing circuits.</p>
+    </div></details>
+
+    <details class="q"><summary>What is an operational amplifier (op-amp) used for? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A high-gain, differential-input voltage amplifier IC used as a building block for many analog functions: amplification, filtering, signal conditioning, comparators, and mathematical operations (summing, integrating, differentiating) via different feedback configurations.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between an NPN and a PNP transistor? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>Both are bipolar junction transistors (BJTs) with three doped regions. An <strong>NPN</strong> transistor has a p-type region sandwiched between two n-type regions, conducts when a positive current flows into the base, and is the more commonly used type. A <strong>PNP</strong> transistor has an n-type region between two p-type regions, conducts when current flows out of the base — used when the circuit needs the opposite polarity behavior.</p>
+    </div></details>
+
+    <details class="q"><summary>What is a flip-flop, and what is it used for? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>A basic digital memory element that stores one bit of state, changing output only at specific triggering events (e.g. a clock edge). Used to build registers, counters, and any circuit that needs to "remember" state — the fundamental building block of sequential logic circuits.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between combinational and sequential logic circuits? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>Combinational</strong> circuits' outputs depend only on the current inputs (no memory) — e.g. an adder, a multiplexer. <strong>Sequential</strong> circuits' outputs depend on both current inputs and past state (they have memory, via flip-flops) — e.g. counters, registers, state machines.</p>
+    </div></details>
+
+    <details class="q"><summary>What is a multiplexer? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>A combinational circuit that selects one of several input signals and forwards it to a single output line, based on a set of select lines — essentially a digital "switch" controlled by binary selector inputs. A demultiplexer performs the reverse operation.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between a microprocessor and a microcontroller? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>A <strong>microprocessor</strong> is just the CPU — it needs external RAM, ROM, and I/O peripherals to form a complete system (e.g. a desktop PC's CPU). A <strong>microcontroller</strong> integrates the CPU along with RAM, ROM/flash, and I/O peripherals on a single chip, designed for embedded/dedicated applications (e.g. controlling a washing machine or a satellite terminal's onboard logic).</p>
+    </div></details>
+
+    <details class="q"><summary>What is a PCB, and what is its purpose? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>A Printed Circuit Board mechanically supports and electrically connects electronic components using conductive copper tracks etched onto a non-conductive substrate, replacing bulky point-to-point wiring with a compact, reliable, and reproducible layout.</p>
+    </div></details>
+
+  </section>
+  </div>
+
+  <!-- 3. TECHNOLOGY KNOW-HOW -->
+  <div class="page" id="page-c3">
+  <a class="back-link" href="#home">&larr; Home</a>
+  <section class="panel" id="c3">
+    <h2 class="section-title">3. Knowledge of Technology Know-How</h2>
+    <p class="blurb">General practical tech awareness expected of any fresher entering a tech role.</p>
+
+    <details class="q"><summary>What is the difference between client-server architecture and peer-to-peer architecture? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p><strong>Client-server:</strong> a central server provides resources/services to multiple clients that request them (e.g. a web app talking to a backend API). <strong>Peer-to-peer:</strong> each node (peer) can act as both client and server, sharing resources directly with other peers without a central authority (e.g. BitTorrent).</p>
+    </div></details>
+
+    <details class="q"><summary>What is an API, and why is it useful? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>An Application Programming Interface defines a contract that lets one piece of software request services/data from another without needing to know its internal implementation. Useful because it enables modularity, reuse, and integration between independently built systems (e.g. a mobile app calling a REST API to fetch data).</p>
+    </div></details>
+
+    <details class="q"><summary>What's the difference between a process and a thread? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>A <strong>process</strong> is an independent program in execution with its own memory space. A <strong>thread</strong> is a lightweight unit of execution within a process, sharing that process's memory with other threads of the same process. Threads are cheaper to create and communicate more easily, but risk data races since memory is shared.</p>
+    </div></details>
+
+    <details class="q"><summary>What is cloud computing, in your own words? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>Delivering computing resources (servers, storage, databases, software) over the internet on demand, instead of owning/maintaining physical hardware — typically billed by usage. Main models: IaaS (raw infrastructure, e.g. AWS EC2), PaaS (managed platform, e.g. Heroku), SaaS (ready-to-use software, e.g. Gmail).</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between SQL and NoSQL databases? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p><strong>SQL</strong> databases (MySQL, PostgreSQL) are relational, use structured schemas/tables, and enforce ACID transactions — good for structured data with complex relationships. <strong>NoSQL</strong> databases (MongoDB, Cassandra) are schema-flexible, store data as documents/key-value/graphs, and prioritize scalability/flexibility over strict consistency — good for unstructured or rapidly evolving data.</p>
+    </div></details>
+
+    <details class="q"><summary>What is an operating system, and name its main functions. <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>System software that manages hardware and provides services to application programs. Main functions: process management, memory management, file system management, I/O device management, and security/access control.</p>
+    </div></details>
+    <details class="q"><summary>What is virtualization? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>Creating a virtual (software-based) version of something physical — a server, storage device, or network — allowing multiple isolated virtual machines to run on one physical machine, each with its own OS, improving hardware utilization and isolation.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between a Type 1 and Type 2 hypervisor? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A <strong>Type 1 (bare-metal)</strong> hypervisor runs directly on the physical hardware (e.g. VMware ESXi, Hyper-V) — better performance, used in production/data centers. A <strong>Type 2 (hosted)</strong> hypervisor runs as an application on top of a host OS (e.g. VirtualBox, VMware Workstation) — easier to set up, typically used for development/testing on a personal machine.</p>
+    </div></details>
+
+    <details class="q"><summary>What is REST, and what makes an API "RESTful"? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>REST (Representational State Transfer) is an architectural style for web APIs. A RESTful API typically: uses standard HTTP methods (GET/POST/PUT/DELETE) mapped to resource operations, is stateless (each request contains all info needed, no server-side session), organizes functionality around resources identified by URLs, and returns representations (often JSON) of resource state.</p>
+    </div></details>
+
+    <details class="q"><summary>What is JSON, and why is it commonly used? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>JavaScript Object Notation — a lightweight, human-readable text format for representing structured data (objects, arrays, key-value pairs). Widely used for APIs and config files because it's language-independent, easy to parse, and less verbose than alternatives like XML.</p>
+    </div></details>
+
+    <details class="q"><summary>What is caching, and why does it improve performance? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>Storing a copy of frequently accessed or expensive-to-compute data somewhere faster to access, so subsequent requests can be served from the cache instead of recomputing/refetching. Improves performance by trading a small amount of (often stale-risk) storage for significantly reduced latency and load on the original source.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between authentication and authorization? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>Authentication</strong> verifies who you are (e.g. logging in with a password). <strong>Authorization</strong> determines what you're allowed to do once identified (e.g. whether you can access a specific resource). Authentication always happens first.</p>
+    </div></details>
+
+    <details class="q"><summary>What is a load balancer, briefly? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>A component that distributes incoming network traffic across multiple backend servers, improving availability and preventing any single server from being overwhelmed.</p>
+    </div></details>
+
+    <details class="q"><summary>What is CI/CD? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>Continuous Integration:</strong> developers frequently merge code changes into a shared repository, with automated builds/tests run on every merge to catch issues early. <strong>Continuous Delivery/Deployment:</strong> automatically preparing (Delivery) or directly shipping (Deployment) every change that passes CI to production, enabling frequent, reliable releases.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between unit testing and integration testing? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>Unit testing</strong> tests individual components/functions in isolation (often with mocked dependencies) to verify each piece works correctly on its own. <strong>Integration testing</strong> tests how multiple components work together (e.g. a service talking to a real database), catching issues that only appear when parts are combined.</p>
+    </div></details>
+
+  </section>
+  </div>
+
+  <!-- 4. NETWORK FUNDAMENTALS -->
+  <div class="page" id="page-c4">
+  <a class="back-link" href="#home">&larr; Home</a>
+  <section class="panel" id="c4">
+    <h2 class="section-title">4. Network Fundamentals</h2>
+
+    <details class="q"><summary>What is the OSI model? Name its 7 layers. <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>A conceptual 7-layer framework for how data travels across a network: <strong>7. Application, 6. Presentation, 5. Session, 4. Transport, 3. Network, 2. Data Link, 1. Physical</strong> (top to bottom). Mnemonic: "All People Seem To Need Data Processing."</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between TCP and UDP? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p><strong>TCP</strong> is connection-oriented, guarantees ordered and reliable delivery (via acknowledgements/retransmission), but has more overhead — used for web browsing, email, file transfer. <strong>UDP</strong> is connectionless, faster, no delivery guarantee — used for video streaming, VoIP, gaming, where speed matters more than occasional lost packets.</p>
+    </div></details>
+
+    <details class="q"><summary>What is an IP address, and what's the difference between IPv4 and IPv6? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>A unique numerical identifier assigned to a device on a network. <strong>IPv4</strong> uses 32 bits (e.g. 192.168.1.1), giving ~4.3 billion addresses. <strong>IPv6</strong> uses 128 bits (e.g. 2001:0db8::1), giving a vastly larger address space, created because IPv4 addresses were running out.</p>
+    </div></details>
+
+    <details class="q"><summary>What does DNS do? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>The Domain Name System translates human-readable domain names (e.g. google.com) into IP addresses that computers use to locate each other on a network — essentially the internet's phone book.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between HTTP and HTTPS? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>HTTP transmits data in plain text. HTTPS adds a layer of encryption (TLS/SSL) on top of HTTP, so data exchanged between browser and server is encrypted and can't be easily intercepted/read — essential for anything involving passwords, payments, or personal data.</p>
+    </div></details>
+
+    <details class="q"><summary>What is a MAC address, and how is it different from an IP address? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A MAC address is a hardware-level identifier burned into a network interface card, used within a local network segment (Data Link layer). An IP address is a logical, software-assigned identifier used for routing across networks (Network layer). MAC addresses don't change; IP addresses can.</p>
+    </div></details>
+
+    <details class="q"><summary>What is a firewall? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A security system (hardware or software) that monitors and controls incoming/outgoing network traffic based on predefined rules, acting as a barrier between a trusted internal network and untrusted external networks.</p>
+    </div></details>
+
+    <details class="q"><summary>What happens when you type a URL into a browser and press Enter? (high level) <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>Browser checks cache → DNS lookup resolves domain to IP → browser opens a TCP connection to that IP (TLS handshake if HTTPS) → sends an HTTP request → server processes and sends back an HTTP response → browser parses HTML/CSS/JS and renders the page.</p>
+    </div></details>
+
+    <details class="q"><summary>(Satellite) What is a Performance Enhancing Proxy (PEP), and why is it used on satellite links? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>Satellite links (especially GEO) have high latency (~500-600ms round trip) and sometimes higher loss than terrestrial links. Standard TCP interprets latency/loss as congestion and throttles throughput aggressively, wasting available bandwidth. A PEP sits at each end of the satellite hop and "spoofs" TCP — acknowledging packets locally and managing the long-haul transfer with a protocol better suited to the link (e.g. SCPS-TP, a TCP variant adapted for space links) — dramatically improving effective throughput without the end hosts needing to change.</p>
+    </div></details>
+
+    <details class="q"><summary>(Satellite) What is "beam handover" in satellite communications? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>The process of transferring an active connection from one satellite spot beam (or satellite, in a LEO constellation) to another as the satellite moves relative to the ground terminal, or as the terminal moves between beam coverage areas — analogous to cell handover in mobile networks. It must happen with minimal disruption to the active session; LEO constellations require this frequently since satellites move quickly relative to the ground.</p>
+    </div></details>
+    <details class="q"><summary>What is subnetting, and why is it used? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>Dividing a larger IP network into smaller sub-networks (subnets), each with its own range of addresses. Used to improve network organization/security (isolating traffic between departments), reduce broadcast domain size, and use address space more efficiently.</p>
+    </div></details>
+
+    <details class="q"><summary>What is NAT (Network Address Translation)? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>A technique that maps private, internal IP addresses to a single (or small pool of) public IP address(es) for communication with the outside internet — lets many devices on a private network share one public IP, and adds a layer of obscurity/security since internal addresses aren't directly reachable from outside.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between a switch and a router? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>A <strong>switch</strong> operates mainly at Layer 2 (Data Link), forwarding frames within a single local network based on MAC addresses. A <strong>router</strong> operates at Layer 3 (Network), forwarding packets between different networks based on IP addresses — it's what connects your local network to the internet.</p>
+    </div></details>
+
+    <details class="q"><summary>What is a VPN, and how does it provide security? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>A Virtual Private Network creates an encrypted tunnel between a device and a remote network/server over an untrusted network (like the public internet), so traffic can't be easily intercepted or read, and the device appears to be on the remote private network.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between latency, bandwidth, and throughput? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>Latency:</strong> the time delay for a packet to travel from source to destination (e.g. milliseconds). <strong>Bandwidth:</strong> the maximum theoretical capacity of a link (e.g. Mbps). <strong>Throughput:</strong> the actual achieved data rate in practice, which is often lower than bandwidth due to latency, congestion, or protocol overhead.</p>
+    </div></details>
+
+  </section>
+  </div>
+
+  <!-- 5. LATEST TRENDS -->
+  <div class="page" id="page-c5">
+  <a class="back-link" href="#home">&larr; Home</a>
+  <section class="panel" id="c5">
+    <h2 class="section-title">5. Knowledge of Latest Trends in Technology</h2>
+    <p class="blurb">Awareness-level, not deep expertise — checking whether the candidate follows the industry at all.</p>
+
+    <details class="q"><summary>What is the difference between AI, Machine Learning, and Deep Learning? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p><strong>AI</strong> is the broad goal of making machines perform tasks that need human-like intelligence. <strong>Machine Learning</strong> is a subset of AI where systems learn patterns from data rather than being explicitly programmed. <strong>Deep Learning</strong> is a subset of ML using multi-layered neural networks, particularly effective for image, speech, and language tasks.</p>
+    </div></details>
+
+    <details class="q"><summary>What is DevOps? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>A set of practices/culture that combines software development (Dev) and IT operations (Ops) to shorten the development lifecycle and deliver features/fixes continuously, using automation for building, testing, and deployment (CI/CD).</p>
+    </div></details>
+
+    <details class="q"><summary>What is containerization, and why has it become popular (e.g. Docker)? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>Packaging an application with all its dependencies into a lightweight, portable unit (container) that runs consistently across environments. Popular because it solves "works on my machine" problems, is far lighter than full virtual machines, and pairs naturally with microservices and cloud deployment.</p>
+    </div></details>
+
+    <details class="q"><summary>What do you understand by cybersecurity, and why does it matter more today? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>Protecting systems, networks, and data from digital attacks (unauthorized access, data breaches, malware, ransomware). It matters more today because of the growth in connected devices (IoT), cloud adoption, remote work, and the rising financial/reputational cost of breaches.</p>
+    </div></details>
+
+    <details class="q"><summary>What is IoT (Internet of Things)? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>A network of physical devices (sensors, appliances, vehicles) embedded with connectivity that lets them collect and exchange data over the internet — e.g. smart thermostats, wearables, industrial sensors.</p>
+    </div></details>
+
+    <details class="q"><summary>Have you heard of Generative AI / LLMs? What's one practical use you know of? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>Generative AI models (like large language models) generate new content — text, code, images — based on patterns learned from training data. Practical uses: code completion/assistance, chatbots, content drafting, summarization, customer support automation.</p>
+    </div></details>
+
+    <details class="q"><summary>(Satellite) What is O-RAN, and why is it relevant to telecom/satellite networks? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>Open Radio Access Network — an industry initiative to make RAN components (radio units, distributed/centralized units) interoperable across vendors via open, standardized interfaces, instead of being locked into a single vendor's proprietary stack. Relevant because it enables flexible, multi-vendor ground network architectures and easier integration of satellite backhaul/access into broader 5G networks.</p>
+    </div></details>
+
+    <details class="q"><summary>(Satellite) What is NTN (Non-Terrestrial Network) support in 3GPP Release 17? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>3GPP Release 17 extended the 5G standard to natively support non-terrestrial networks — satellites (GEO, MEO, LEO) and HAPS — as part of the cellular architecture, rather than satellites being a completely separate system. This enables standardized integration of satellite connectivity with terrestrial 5G, important for extending coverage to remote/maritime/aviation scenarios where ground infrastructure isn't viable.</p>
+    </div></details>
+    <details class="q"><summary>What is edge computing, and why is it useful? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>Processing data closer to where it's generated (e.g. on a local device or nearby server) rather than sending everything to a centralized cloud data center. Reduces latency, saves bandwidth, and can keep systems working even with intermittent connectivity — useful in remote/IoT and satellite-connected scenarios where round-trip to a distant cloud is costly.</p>
+    </div></details>
+
+    <details class="q"><summary>What is a digital twin? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A virtual, continuously-updated replica of a physical system (e.g. a satellite, a factory line) built from real sensor data, used to simulate, monitor, and predict the behavior of the real-world counterpart without touching it directly.</p>
+    </div></details>
+
+    <details class="q"><summary>What is blockchain, in simple terms? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>A distributed, append-only ledger where transactions are grouped into cryptographically-linked blocks, replicated across many participants, making the historical record extremely difficult to alter without consensus — the underlying technology behind cryptocurrencies, but also applied to supply chain tracking and other trust-sensitive record-keeping.</p>
+    </div></details>
+
+    <details class="q"><summary>What is quantum computing, at a high level? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>A computing paradigm that uses quantum bits (qubits), which can represent a superposition of 0 and 1 simultaneously (and can be entangled), potentially solving certain problems (like factoring large numbers or simulating molecules) exponentially faster than classical computers for specific algorithms — still largely experimental/early-stage for practical general use.</p>
+    </div></details>
+
+    <details class="q"><summary>What is 5G, and how is it different from 4G? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>The fifth generation of cellular network technology, offering significantly higher data rates, much lower latency (single-digit ms), and far greater device density support than 4G — enabling use cases like massive IoT deployments, network slicing, and (as covered in 3GPP Release 17) integration with non-terrestrial (satellite) networks.</p>
+    </div></details>
+
+    <details class="q"><summary>What is Zero Trust security? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>A security model based on "never trust, always verify" — no user or device is trusted by default, even if inside the network perimeter; every access request is authenticated, authorized, and encrypted, continuously, regardless of location. A shift away from the older "trusted internal network" perimeter-based model.</p>
+    </div></details>
+
+    <details class="q"><summary>What is Infrastructure as Code (IaC)? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>Managing and provisioning infrastructure (servers, networks, configurations) through machine-readable definition files (e.g. Terraform, CloudFormation) instead of manual setup — enabling version control, repeatability, and automated, consistent environments.</p>
+    </div></details>
+
+  </section>
+  </div>
+
+  <!-- 6. PROGRAMMING SKILLS (DEEP) -->
+  <div class="page" id="page-c6">
+  <a class="back-link" href="#home">&larr; Home</a>
+  <section class="panel" id="c6">
+    <h2 class="section-title">6. Programming Skills</h2>
+    <p class="blurb">Deeper question bank as requested — language fundamentals, OOP, data structures, and complexity, graded Basic → Advanced.</p>
+
+    <details class="q"><summary>What is the difference between call by value and call by reference? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p><strong>Call by value</strong> passes a copy of the variable — changes inside the function don't affect the original. <strong>Call by reference</strong> passes the memory address — changes inside the function do affect the original.</p>
+      <pre>void byValue(int x) { x = 100; }        // original unchanged
+void byRef(int &x)  { x = 100; }        // original changed (C++)
+
+int a = 5;
+byValue(a);  // a is still 5
+byRef(a);    // a is now 100</pre>
+    </div></details>
+
+    <details class="q"><summary>What are the four pillars of OOP? Explain each briefly. <span class="level l1">Level 1</span></summary><div class="answer">
+      <p><strong>Encapsulation:</strong> bundling data and methods together, hiding internal state behind an interface (getters/setters, private fields).<br>
+      <strong>Abstraction:</strong> exposing only essential features, hiding implementation complexity (e.g. an interface/abstract class).<br>
+      <strong>Inheritance:</strong> a class acquiring properties/behavior of another class, enabling reuse.<br>
+      <strong>Polymorphism:</strong> the same interface/method behaving differently depending on the object — via method overriding (runtime) or overloading (compile-time).</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between an array and a linked list? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>An <strong>array</strong> stores elements in contiguous memory, allowing O(1) random access via index, but insertion/deletion in the middle is O(n) (needs shifting) and size is typically fixed. A <strong>linked list</strong> stores elements as nodes with pointers to the next node — insertion/deletion is O(1) once you have the position, but access is O(n) (must traverse), and it uses extra memory for pointers.</p>
+    </div></details>
+
+    <details class="q"><summary>What is recursion? Write a recursive function to compute factorial. <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>A function that calls itself to solve smaller instances of the same problem, with a base case that stops the recursion.</p>
+      <pre>int factorial(int n) {
+    if (n <= 1) return 1;        // base case
+    return n * factorial(n - 1); // recursive case
+}</pre>
+    </div></details>
+
+    <details class="q"><summary>What is time complexity, and what does O(n) mean? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>Time complexity describes how an algorithm's running time grows as input size (n) grows, using Big-O notation to express the worst-case upper bound. <strong>O(n)</strong> means running time grows linearly with input size — e.g. a single loop over n elements. Common orders (fastest to slowest): O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n²) &lt; O(2ⁿ).</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between a stack and a queue? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p><strong>Stack</strong>: LIFO (Last In, First Out) — think of a stack of plates; push/pop happen at the same end. Used in function call management, undo operations, expression evaluation. <strong>Queue</strong>: FIFO (First In, First Out) — think of a line at a ticket counter; insertion at the rear, removal from the front. Used in task scheduling, BFS, print queues.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between overloading and overriding? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p><strong>Overloading:</strong> multiple methods with the same name but different parameter lists in the same class — resolved at compile time (compile-time/static polymorphism).<br>
+      <strong>Overriding:</strong> a subclass provides a specific implementation of a method already defined in its parent class, with the same signature — resolved at runtime (runtime/dynamic polymorphism), requires inheritance.</p>
+      <pre>// Overloading
+int add(int a, int b);
+double add(double a, double b);
+
+// Overriding
+class Animal { void sound() { print("..."); } }
+class Dog extends Animal { void sound() { print("Bark"); } } // overrides</pre>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between an abstract class and an interface? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>An <strong>abstract class</strong> can have both implemented and unimplemented (abstract) methods, plus state (fields), and a class can extend only one abstract class. An <strong>interface</strong> traditionally declares only method signatures (no state, though modern languages like Java 8+ allow default methods), and a class can implement multiple interfaces — used when you need multiple inheritance of behavior/type.</p>
+    </div></details>
+
+    <details class="q"><summary>What is a hash table / hash map, and how does it achieve near O(1) lookup? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A data structure that maps keys to values using a hash function to compute an index into an array of buckets. Average-case lookup/insert/delete is O(1) because the hash function directly computes where to look, avoiding a linear search. Collisions (two keys hashing to the same bucket) are handled via chaining (linked list per bucket) or open addressing (probing for the next free slot); worst case degrades to O(n) with many collisions.</p>
+    </div></details>
+
+    <details class="q"><summary>Explain binary search. What's its time complexity, and what's the precondition for it to work? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>Repeatedly divide a <em>sorted</em> array in half: compare the target to the middle element, and discard the half that can't contain it. Time complexity O(log n) — each step halves the search space. Precondition: the array must be sorted; binary search doesn't work on unsorted data.</p>
+      <pre>int binarySearch(int arr[], int n, int target) {
+    int lo = 0, hi = n - 1;
+    while (lo <= hi) {
+        int mid = lo + (hi - lo) / 2;
+        if (arr[mid] == target) return mid;
+        else if (arr[mid] < target) lo = mid + 1;
+        else hi = mid - 1;
+    }
+    return -1;
+}</pre>
+    </div></details>
+
+    <details class="q"><summary>What is exception handling? Why use try/catch instead of just letting the program crash? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>Exception handling lets a program detect and respond to runtime errors gracefully instead of terminating abruptly. <code>try</code> wraps risky code, <code>catch</code> handles specific error types, <code>finally</code> runs cleanup code regardless of outcome. This allows recovery (e.g. retry, fallback, user-friendly error message) and protects resources (e.g. closing a file/connection) even when something goes wrong.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between deep copy and shallow copy? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A <strong>shallow copy</strong> copies an object's top-level fields, but if a field is a reference to another object, both the original and copy point to the <em>same</em> nested object — modifying it through one affects the other. A <strong>deep copy</strong> recursively copies all nested objects too, so the copy is fully independent of the original.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between a compile-time constant and a runtime constant? Why prefer immutability? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A compile-time constant's value is known and fixed at compile time (e.g. <code>const int SIZE = 10;</code> in C++, <code>final</code> with a literal in Java), allowing the compiler to optimize (e.g. inline it). A runtime constant is fixed after initialization but its value is only known when the program runs (e.g. read from user input into a <code>final</code> variable). Immutability is preferred because immutable objects are inherently thread-safe (no risk of concurrent modification), easier to reason about, and reduce a whole class of bugs from unexpected state changes.</p>
+    </div></details>
+
+    <details class="q"><summary>What causes a memory leak, and how would you detect one in a language like C/C++? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A memory leak happens when dynamically allocated memory is never freed and the program loses all references to it, so it can't be reclaimed — the process's memory usage grows over time. In C/C++ this typically means <code>malloc</code>/<code>new</code> without a matching <code>free</code>/<code>delete</code>. Detection: tools like Valgrind, AddressSanitizer, or manually tracking allocation/deallocation pairs; in managed languages (Java, Python, JS) leaks are less direct but still happen via lingering references (e.g. objects stuck in a cache or listener list that's never cleared).</p>
+    </div></details>
+
+    <details class="q"><summary>Explain the SOLID principles briefly. <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>S</strong>ingle Responsibility — a class should have one reason to change. <strong>O</strong>pen/Closed — open for extension, closed for modification. <strong>L</strong>iskov Substitution — subtypes must be substitutable for their base type without breaking behavior. <strong>I</strong>nterface Segregation — prefer many small, specific interfaces over one large general-purpose one. <strong>D</strong>ependency Inversion — depend on abstractions, not concrete implementations.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between multithreading and multiprocessing? When would you choose one over the other? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>Multithreading</strong> runs multiple threads within a single process, sharing memory — lighter weight, faster communication, but requires careful synchronization to avoid race conditions. <strong>Multiprocessing</strong> runs multiple independent processes, each with its own memory space — heavier (more overhead to create/communicate, e.g. via IPC), but safer (no shared-memory races) and can bypass limitations like Python's GIL for true parallelism. Choose multithreading for I/O-bound tasks needing shared state; multiprocessing for CPU-bound tasks needing true parallel execution.</p>
+    </div></details>
+    <details class="q"><summary>What is the difference between implicit and explicit type casting? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>Implicit</strong> casting is done automatically by the compiler/runtime when converting is safe and lossless (e.g. <code>int</code> to <code>double</code>). <strong>Explicit</strong> casting requires the programmer to manually specify the conversion (e.g. <code>(int) someDouble</code>), typically required when the conversion could lose information or isn't automatically safe.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between value equality and reference equality? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>Value equality</strong> checks whether two objects have the same content (e.g. <code>.equals()</code> in Java, <code>==</code> in Python for most types). <strong>Reference equality</strong> checks whether two variables point to the exact same object in memory (e.g. <code>==</code> in Java for objects, <code>is</code> in Python). Two distinct objects can be value-equal without being reference-equal.</p>
+    </div></details>
+
+    <details class="q"><summary>What is dynamic programming? Give a simple example. <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>An optimization technique for problems with overlapping subproblems and optimal substructure — solve each subproblem once, store (memoize) the result, and reuse it instead of recomputing. Example: computing Fibonacci numbers recursively is exponential without memoization; storing each computed <code>fib(n)</code> the first time brings it down to O(n).</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between a mutex and a semaphore? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>A <strong>mutex</strong> (mutual exclusion lock) allows only one thread to hold it at a time and is typically owned by the thread that locked it (only that thread can unlock it) — used to protect a critical section. A <strong>semaphore</strong> maintains a count and allows up to N threads to proceed simultaneously (a "binary semaphore" with count 1 behaves like a mutex, but without the ownership restriction) — used to control access to a pool of resources.</p>
+    </div></details>
+
+    <details class="q"><summary>What is garbage collection, and how does it help prevent memory leaks? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>An automatic memory management process (used in languages like Java, Python, JavaScript) that periodically identifies objects no longer reachable from any active reference and frees their memory, so the programmer doesn't need to manually call <code>free()</code>/<code>delete</code>. It prevents the classic C/C++-style "forgot to free" leak, though leaks can still happen if references are unintentionally kept alive (e.g. a growing cache that's never cleared).</p>
+    </div></details>
+
+  </section>
+  </div>
+
+  <!-- BONUS: DATA STRUCTURES -->
+  <div class="page" id="page-ds">
+  <a class="back-link" href="#home">&larr; Home</a>
+  <section class="panel" id="ds">
+    <h2 class="section-title">Data Structures</h2>
+    <p class="blurb">Bonus section (not part of the 10-criterion scorecard) — pairs with Programming Skills for a deeper technical round.</p>
+
+    <details class="q"><summary>What is a data structure? Why do we need different kinds? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>A way of organizing and storing data so it can be accessed and modified efficiently. Different data structures make different trade-offs (fast lookup vs fast insertion vs ordered iteration, etc.), so choosing the right one for the access pattern you actually need is critical for performance.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between linear and non-linear data structures? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p><strong>Linear</strong> structures arrange elements sequentially, one after another (array, linked list, stack, queue) — traversal is straightforward, one direction at a time. <strong>Non-linear</strong> structures don't arrange elements sequentially (trees, graphs) — an element can connect to multiple others, enabling hierarchical or networked relationships.</p>
+    </div></details>
+
+    <details class="q"><summary>What is an array? What are its main limitations? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>A collection of elements stored in contiguous memory, accessed via an index, giving O(1) random access. Limitations: typically fixed size (in many languages), and inserting/deleting in the middle is O(n) because subsequent elements must shift.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between a singly linked list and a doubly linked list? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>A <strong>singly linked list</strong> node points only to the next node — traversal is one-directional. A <strong>doubly linked list</strong> node points to both the next and previous node — allows traversal in both directions and O(1) removal given a node reference, at the cost of extra memory per node for the second pointer.</p>
+    </div></details>
+
+    <details class="q"><summary>What is a stack? Name two real-world applications. <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>A LIFO (Last In, First Out) structure — elements are added and removed from the same end ("top"). Applications: function call management (the call stack), undo functionality in editors, and expression evaluation/parsing (e.g. matching brackets, converting infix to postfix).</p>
+    </div></details>
+
+    <details class="q"><summary>What is a queue, and where is it used? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A FIFO (First In, First Out) structure — elements are added at the rear and removed from the front. Used for task scheduling, handling requests in the order received, breadth-first search, and buffering data between producers and consumers.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between a binary tree and a binary search tree (BST)? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A <strong>binary tree</strong> is simply a tree where each node has at most two children — no ordering constraint. A <strong>binary search tree</strong> additionally requires that for every node, all values in its left subtree are smaller and all values in its right subtree are larger — this ordering is what enables efficient O(log n) search, insert, and delete (on a balanced BST).</p>
+    </div></details>
+
+    <details class="q"><summary>What is a balanced BST, and why does it matter? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A BST where the height is kept close to log(n) by restructuring (rotations) as elements are inserted/deleted, rather than being allowed to degrade into a linked-list-like chain in the worst case. It matters because an unbalanced BST can degrade search/insert/delete to O(n); balanced variants like AVL trees and Red-Black trees guarantee O(log n) for these operations.</p>
+    </div></details>
+
+    <details class="q"><summary>What is a graph? What is the difference between directed and undirected graphs? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A graph is a set of nodes (vertices) connected by edges, representing relationships that aren't necessarily hierarchical. In an <strong>undirected</strong> graph, an edge represents a two-way relationship (if A connects to B, B connects to A) — e.g. a friendship network. In a <strong>directed</strong> graph, edges have a direction (A &rarr; B doesn't imply B &rarr; A) — e.g. a "follows" relationship on social media.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between BFS and DFS traversal? When would you use one over the other? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p><strong>BFS</strong> (Breadth-First Search) explores level by level using a queue — finds the shortest path in an unweighted graph, and is preferred when you need the closest/nearest matches first. <strong>DFS</strong> (Depth-First Search) explores as far as possible down one branch before backtracking, using a stack (or recursion) — uses less memory for wide graphs, and is preferred for tasks like detecting cycles, topological sorting, or exploring all possibilities (e.g. maze solving).</p>
+    </div></details>
+
+    <details class="q"><summary>What is a priority queue, and how is it typically implemented? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>A queue-like structure where each element has a priority, and the element with the highest (or lowest) priority is served first, regardless of insertion order. Typically implemented using a <strong>heap</strong> (binary heap), giving O(log n) insertion and O(log n) removal of the highest-priority element, with O(1) access to peek at it.</p>
+    </div></details>
+
+    <details class="q"><summary>What is a Trie, and what is it commonly used for? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>A tree-like structure where each node represents a character, and paths from the root spell out strings/prefixes — sibling nodes at each level are distinct next characters. Commonly used for autocomplete/prefix search, spell checkers, and IP routing tables, since it can find all words with a given prefix in time proportional to the prefix length, independent of how many words are stored.</p>
+    </div></details>
+
+    <details class="q"><summary>Compare the time complexity of insertion, deletion, and search across an array, a linked list, and a hash table. <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>Array:</strong> search O(n) unsorted / O(log n) if sorted (binary search); insert/delete O(n) (shifting), O(1) at the end if unsorted and order doesn't matter. <strong>Linked list:</strong> search O(n); insert/delete O(1) once you have a reference to the node (no shifting needed), but O(n) to find that node first. <strong>Hash table:</strong> average-case O(1) for search, insert, and delete (worst case O(n) with heavy collisions).</p>
+    </div></details>
+
+    <details class="q"><summary>What is the difference between a min-heap and a max-heap, and what does "heapify" do? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>In a <strong>min-heap</strong>, every parent node is &le; its children, so the smallest element is always at the root. In a <strong>max-heap</strong>, every parent is &ge; its children, so the largest is at the root. <strong>Heapify</strong> is the operation that restores the heap property after an insertion or removal disturbs it — "sifting" an out-of-place element up or down until every parent-child relationship satisfies the heap property again, in O(log n) time.</p>
+    </div></details>
+
+    <details class="q"><summary>How would you detect a cycle in a linked list? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>Use <strong>Floyd's cycle detection algorithm</strong> ("tortoise and hare"): use two pointers, one moving one step at a time (slow) and one moving two steps at a time (fast). If there's a cycle, the fast pointer will eventually "lap" the slow pointer and they'll meet inside the cycle; if there's no cycle, the fast pointer reaches the end (null) first. Runs in O(n) time with O(1) extra space, unlike a hash-set approach which needs O(n) space.</p>
+    </div></details>
+  </section>
+  </div>
+
+  <!-- 7. CODING STYLE & OPTIMIZATION -->
+  <div class="page" id="page-c7">
+  <a class="back-link" href="#home">&larr; Home</a>
+  <section class="panel" id="c7">
+    <h2 class="section-title">7. Coding Styles and Optimized Coding</h2>
+
+    <details class="q"><summary>What makes code "readable"? Name a few practices. <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>Meaningful variable/function names, consistent indentation and naming convention, small functions doing one thing, avoiding deep nesting, comments explaining <em>why</em> not <em>what</em>, and consistent formatting (often enforced by a linter/formatter).</p>
+    </div></details>
+
+    <details class="q"><summary>What is the DRY principle? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>"Don't Repeat Yourself" — avoid duplicating logic; extract repeated code into a reusable function, class, or module. Reduces bugs (fix in one place, not many) and eases maintenance.</p>
+    </div></details>
+
+    <details class="q"><summary>Why is this code inefficient, and how would you improve it?
+<pre>for (int i = 0; i < arr.length; i++) {
+    for (int j = 0; j < arr.length; j++) {
+        if (arr[i] == target) found = true;
+    }
+}</pre> <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>The inner loop does nothing useful — it re-runs the same check <code>arr.length</code> times per outer iteration, making it O(n²) for what should be an O(n) linear search. Fix: remove the redundant inner loop entirely, or better, sort once and binary search (O(log n)) if searching repeatedly.</p>
+      <pre>for (int i = 0; i < arr.length; i++) {
+    if (arr[i] == target) { found = true; break; } // early exit too
+}</pre>
+    </div></details>
+
+    <details class="q"><summary>What is premature optimization, and why is it considered a pitfall? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>Optimizing parts of code before knowing whether they're actually a performance bottleneck — often at the cost of readability and time. The pitfall: developers frequently guess wrong about what's slow; the right approach is to write clear code first, profile to find actual bottlenecks, then optimize those specific hot spots.</p>
+    </div></details>
+
+    <details class="q"><summary>What's wrong with this naming, and how would you rename it?
+<pre>int d; // elapsed time in days
+int x1, x2, x3;
+void calc(int a, int b) { ... }</pre> <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>Single-letter/generic names give no context and force readers to hunt for comments or usage to understand intent. Better:</p>
+      <pre>int elapsedDays;
+int width, height, depth;
+void calculateArea(int length, int breadth) { ... }</pre>
+    </div></details>
+
+    <details class="q"><summary>What is code refactoring, and why do it if the code already "works"? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>Restructuring existing code to improve readability, structure, or performance <em>without changing its external behavior</em>. Done even on working code because "working" isn't the same as "maintainable" — unrefactored code accumulates technical debt, making future changes slower and riskier.</p>
+    </div></details>
+
+    <details class="q"><summary>What are code smells? Name two examples. <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>Surface-level indicators of a deeper problem in the code, not bugs themselves. Examples: <strong>long method</strong> (doing too many things — should be split), <strong>duplicate code</strong> (violates DRY), <strong>large class/god object</strong> (too many responsibilities), <strong>deeply nested conditionals</strong> (hard to follow — consider early returns/guard clauses).</p>
+    </div></details>
+
+    <details class="q"><summary>Why is it generally better to use a <code>StringBuilder</code> (or string concatenation in a loop via a list/join) instead of repeatedly concatenating strings with <code>+</code> in a loop? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>Strings are typically immutable, so each <code>+</code> concatenation creates a brand-new string object, copying all previous characters — an O(n) operation repeated n times gives O(n²) overall for building a string in a loop. A mutable buffer (StringBuilder in Java, list + <code>''.join()</code> in Python) accumulates content in one resizable structure, achieving O(n) overall.</p>
+    </div></details>
+    <details class="q"><summary>What is a linter, and why use one? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A tool that statically analyzes code to flag stylistic issues, potential bugs, and deviations from a defined style guide, before the code even runs. Enforces consistency across a codebase/team automatically, catching many issues earlier and cheaper than code review alone.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the Single Responsibility Principle? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>A class/function/module should have only one reason to change — i.e. it should do one thing well. Keeps code easier to understand, test, and modify without unintended side effects elsewhere.</p>
+    </div></details>
+
+    <details class="q"><summary>What is technical debt? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>The implied future cost of choosing a quick/expedient solution now instead of a better, more thorough one — like financial debt, it accrues "interest" (harder future changes, more bugs) until it's "paid down" (refactored). Not inherently bad in small amounts if taken on deliberately, but dangerous when it accumulates unmanaged.</p>
+    </div></details>
+
+    <details class="q"><summary>What is a "God function/class," and why is it a problem? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>A function or class that has grown to do far too much — touching many unrelated responsibilities. It's a problem because it's hard to understand, test, and modify safely; a small change risks breaking unrelated behavior bundled into the same function/class.</p>
+    </div></details>
+
+    <details class="q"><summary>Why should you avoid "magic numbers" in code? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>A magic number is an unexplained literal value embedded directly in code (e.g. <code>if (status == 3)</code>). It's a problem because the reader has no idea what it means, and if it needs to change, you must hunt down every occurrence. Fix: use a named constant (e.g. <code>STATUS_APPROVED = 3</code>) instead.</p>
+    </div></details>
+
+    <details class="q"><summary>What is unit testing, and how does it give you confidence to refactor/optimize code? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>Writing automated tests that verify a small piece of code behaves correctly in isolation. With good unit test coverage, you can refactor or optimize code and immediately know (by re-running the tests) whether you broke existing behavior — without unit tests, every change is a leap of faith.</p>
+    </div></details>
+
+    <details class="q"><summary>What is the "Boy Scout Rule" in coding? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p>"Always leave the code cleaner than you found it" — whenever you touch a piece of code (even just to fix an unrelated bug), make a small improvement to it (better naming, remove dead code, add a missing test) rather than leaving it exactly as messy as you found it. Incremental cleanup instead of never having time for a big rewrite.</p>
+    </div></details>
+
+  </section>
+  </div>
+
+  <!-- 8. LOGICAL THINKING -->
+  <div class="page" id="page-c8">
+  <a class="back-link" href="#home">&larr; Home</a>
+  <section class="panel" id="c8">
+    <h2 class="section-title">8. Logical Thinking and Reasoning</h2>
+    <p class="blurb">Aptitude-style puzzles — assess approach/reasoning process, not just the final answer.</p>
+
+    <details class="q"><summary>You have 8 identical-looking balls, one is heavier than the rest. Using a balance scale, find the heavy ball in the minimum number of weighings. <span class="level l1">Level 1</span></summary><div class="answer">
+      <p><strong>Answer: 2 weighings.</strong> Split into 3 groups of 3-3-2. Weigh 3 vs 3: if balanced, the heavy ball is in the group of 2 — weigh those two against each other. If unbalanced, take the heavier group of 3, weigh 1 vs 1 (leaving one aside) — if balanced, the one left aside is heaviest; otherwise the heavier side wins.</p>
+    </div></details>
+
+    <details class="q"><summary>A man looks at a photo and says "Brothers and sisters I have none, but this man's father is my father's son." Who is in the photo? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p><strong>His son.</strong> "My father's son" (with no siblings) is the man himself. So the photo's subject's father is the speaker himself — meaning the photo is of his son.</p>
+    </div></details>
+
+    <details class="q"><summary>Find the next number in the series: 2, 6, 12, 20, 30, ? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p><strong>42.</strong> Differences between consecutive terms: 4, 6, 8, 10, 12 — increasing by 2 each time. 30 + 12 = 42. (Pattern: n(n+1) for n = 1,2,3,4,5,6.)</p>
+    </div></details>
+
+    <details class="q"><summary>Three switches outside a room control three bulbs inside (which you can't see while flipping switches). You may enter the room only once. How do you determine which switch controls which bulb? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p>Turn switch 1 ON, wait a few minutes, turn it OFF. Turn switch 2 ON and leave it on. Enter the room: the bulb that's <strong>on</strong> is controlled by switch 2; the bulb that's <strong>off but warm</strong> was switch 1; the bulb that's <strong>off and cold</strong> is switch 3.</p>
+    </div></details>
+
+    <details class="q"><summary>If a train travels 60 km in 45 minutes, what is its speed in km/hr? <span class="level l1">Level 1</span></summary><div class="answer">
+      <p><strong>80 km/hr.</strong> 45 minutes = 0.75 hr. Speed = distance/time = 60 / 0.75 = 80 km/hr.</p>
+    </div></details>
+
+    <details class="q"><summary>Statement: "All engineers are hardworking. Some hardworking people are creative." Can we conclude "Some engineers are creative"? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p><strong>No, not necessarily.</strong> Classic syllogism trap — the "hardworking people" who are creative might not overlap with the "engineers" subset at all. This tests whether the candidate distinguishes valid logical conclusions from plausible-sounding but unproven ones.</p>
+    </div></details>
+
+    <details class="q"><summary>A frog is at the bottom of a 30 ft well. Each day it climbs 3 ft, but each night it slips back 2 ft. How many days to reach the top? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p><strong>28 days.</strong> Net gain per full day/night cycle = 1 ft. After 27 days: 27 ft climbed. On day 28, it climbs 3 ft during the day, reaching 30 ft — it's already out, so it doesn't slip back that night.</p>
+    </div></details>
+
+    <details class="q"><summary>You have two ropes, each takes exactly 60 minutes to burn completely, but they don't burn at a uniform rate. How do you measure exactly 45 minutes? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>Light rope A at <em>both ends</em> and rope B at <em>one end</em>, simultaneously. Rope A burns out in 30 minutes (burning from both ends halves the time regardless of uneven rate). At that moment, light the other end of rope B too — it has 30 minutes of "material" left but now burns from both ends, so it finishes in 15 more minutes. Total: 30 + 15 = 45 minutes.</p>
+    </div></details>
+    <details class="q"><summary>You have two hourglasses: one measures 7 minutes, the other 4 minutes. How do you measure exactly 9 minutes? <span class="level l2">Level 2</span></summary><div class="answer">
+      <p>Start both hourglasses together. When the 4-minute one runs out, flip it (now: 4 min elapsed, 3 min left on the 7-min one, 4-min one restarted). When the 7-minute one runs out (at 7 min total), the 4-minute one has been running for 3 minutes, so it has 1 minute left — let it finish (at 8 min total), then flip it one more time and let it run fully (4 more minutes)... <em>Simpler path:</em> start both together; when the 7-min glass finishes (7 min elapsed), flip it immediately; when the 4-min glass finishes (at 4 min... wait, recompute) — the clean known solution: start both together. When 4-min glass empties, flip it (t=4). When 7-min glass empties (t=7), the 4-min glass has been running 3 min, so 1 min of sand remains in the top — flip the 7-min glass now too so it starts measuring that same duration... the standard accepted answer: at t=7 (7-min glass empty), flip the 4-min glass (which has 1 min of sand left in its bottom bulb, so flipping starts a 1-min measurement) — when that finishes, t=8. This is a classic puzzle; the key insight to listen for is the candidate reasoning about "elapsed vs remaining sand," not necessarily nailing the exact optimal sequence.</p>
+    </div></details>
+
+    <details class="q"><summary>Find the odd one out: 2, 3, 5, 7, 9, 11. <span class="level l2">Level 2</span></summary><div class="answer">
+      <p><strong>9.</strong> All the others are prime numbers; 9 = 3&times;3 is composite.</p>
+    </div></details>
+
+    <details class="q"><summary>A clock shows 3:15. What is the angle between the hour and minute hands? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>7.5&deg;.</strong> The minute hand is at the "3" position (90&deg; from 12). The hour hand at 3:00 would also be at 90&deg;, but by 3:15 it has moved a quarter of the way toward 4 (each hour = 30&deg;, so a quarter hour = 7.5&deg;) — giving hour hand at 97.5&deg;. Difference = 97.5&deg; - 90&deg; = 7.5&deg;.</p>
+    </div></details>
+
+    <details class="q"><summary>If today is Wednesday, what day of the week will it be 100 days from now? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>Friday.</strong> 100 &divide; 7 = 14 remainder 2. So it's the same as 2 days after Wednesday: Thursday, then Friday.</p>
+    </div></details>
+
+    <details class="q"><summary>A man buys a horse for $60, sells it for $70, buys it back for $80, and sells it again for $90. What is his overall profit? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>$20 profit.</strong> Track net cash flow: -60 (buy) +70 (sell) -80 (buy) +90 (sell) = +20.</p>
+    </div></details>
+
+    <details class="q"><summary>Complete the analogy: Pen is to Write as Knife is to ___? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>Cut.</strong> Tests the ability to identify the functional relationship (tool &rarr; primary action) and apply the same pattern.</p>
+    </div></details>
+
+    <details class="q"><summary>Two trains 100 km apart move toward each other at 20 km/hr and 30 km/hr. How long until they meet? <span class="level l3">Level 3</span></summary><div class="answer">
+      <p><strong>2 hours.</strong> Their combined closing speed is 20 + 30 = 50 km/hr. Time = distance / relative speed = 100 / 50 = 2 hours.</p>
+    </div></details>
+
+  </section>
+  </div>
+
+  <!-- 9. CAREER ASPIRATIONS -->
+  <div class="page" id="page-c9">
+  <a class="back-link" href="#home">&larr; Home</a>
+  <section class="panel" id="c9">
+    <h2 class="section-title">9. Career Aspirations and Long-Term Goals</h2>
+    <p class="blurb">Behavioral — gauge genuine motivation, self-awareness, and alignment with the role/company.</p>
+
+    <details class="q"><summary>Where do you see yourself in 5 years? <span class="level l1">Level 1</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> realistic growth trajectory tied to skills/responsibility (not just a job title), some alignment with what this role/company can actually offer, avoids vague or overly rehearsed answers.</div>
+    </div></details>
+
+    <details class="q"><summary>Why did you choose this field (CS/IT/ECE/EC), and why this company? <span class="level l1">Level 1</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> genuine interest/reasoning versus generic "I like technology," evidence they researched the company (products, values, recent work) rather than a copy-paste answer.</div>
+    </div></details>
+
+    <details class="q"><summary>What are you doing currently to keep learning outside of your coursework? <span class="level l1">Level 1</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> self-driven learning — personal projects, online courses, open source, competitive coding, reading — versus "nothing beyond college syllabus." Strong signal of a growth mindset.</div>
+    </div></details>
+
+    <details class="q"><summary>Describe a failure or setback and what you learned from it. <span class="level l1">Level 1</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> genuine ownership of the mistake (not blaming others), a concrete lesson applied afterward, self-awareness rather than a "fake failure" (e.g. "I work too hard").</div>
+    </div></details>
+
+    <details class="q"><summary>What kind of role/work excites you the most — and what would you want to avoid? <span class="level l1">Level 1</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> honesty and self-knowledge about preferences (e.g. backend vs frontend, individual vs team work), which helps assess fit for the specific open role.</div>
+    </div></details>
+    <details class="q"><summary>What motivates you to perform well at work? <span class="level l2">Level 2</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> a genuine, specific driver (mastery, impact, recognition, learning) rather than a generic "I like to work hard."</div>
+    </div></details>
+
+    <details class="q"><summary>How do you prioritize when you have multiple deadlines? <span class="level l2">Level 2</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> a real method (urgency vs importance, communicating trade-offs to stakeholders) rather than "I just do everything at once."</div>
+    </div></details>
+
+    <details class="q"><summary>What does "success" mean to you in your first year on the job? <span class="level l2">Level 2</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> realistic, learning-oriented markers (ramping up, delivering reliably, building relationships) rather than "getting promoted immediately."</div>
+    </div></details>
+
+    <details class="q"><summary>How do you stay updated with developments in your field? <span class="level l2">Level 2</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> specific sources/habits (newsletters, communities, following releases) rather than a vague "I read the news."</div>
+    </div></details>
+
+    <details class="q"><summary>What would you do if you realized you chose the wrong specialization? <span class="level l2">Level 2</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> honest self-reflection and problem-solving rather than defensiveness; shows they'd act deliberately rather than just complain.</div>
+    </div></details>
+
+    <details class="q"><summary>Describe a goal you set for yourself and how you achieved it. <span class="level l3">Level 3</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> a specific, real example with a concrete plan and follow-through, not just a stated ambition.</div>
+    </div></details>
+
+    <details class="q"><summary>How do you handle working on something you're not passionate about? <span class="level l3">Level 3</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> professionalism and the ability to find some engagement/meaning even in less exciting work — a red flag if they say they simply do it poorly.</div>
+    </div></details>
+
+    <details class="q"><summary>What is the biggest risk you've taken in your academic or early career journey? <span class="level l3">Level 3</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> a genuine risk with real stakes, and reflection on the outcome/lesson, not something trivial dressed up as bold.</div>
+    </div></details>
+
+    <details class="q"><summary>How would your professors or peers describe your work ethic? <span class="level l3">Level 3</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> specific, third-person-plausible traits, ideally with a brief example, not just a list of adjectives.</div>
+    </div></details>
+
+    <details class="q"><summary>Where do you want to be in terms of skill mastery two years from now? <span class="level l3">Level 3</span></summary><div class="answer">
+      <div class="rubric"><strong>Look for:</strong> a concrete skill target relevant to the role, showing they've thought about their own growth path.</div>
+    </div></details>
+
+  </section>
+  </div>
+
+  <!-- 10. CANDIDATE QUESTIONS -->
+  <div class="page" id="page-c10">
+  <a class="back-link" href="#home">&larr; Home</a>
+  <section class="panel" id="c10">
+    <h2 class="section-title">10. Candidate Questions</h2>
+    <p class="blurb">This criterion scores the quality of questions the <em>candidate</em> asks you at the end — not questions to ask them. Use this rubric.</p>
+    <div class="rubric">
+      <p><strong>Strong signal:</strong> asks about the actual work (tech stack, team structure, what a typical week looks like, growth/mentorship opportunities, how success is measured in the role) — shows genuine engagement and that they were listening during the interview.</p>
+      <p><strong>Weak signal:</strong> no questions at all ("No, I think you covered everything"), or only asks about salary/leave/perks with nothing about the work itself.</p>
+      <p><strong>Red flag:</strong> a question that reveals they didn't research the company or weren't paying attention to what was already explained earlier in the interview.</p>
+    </div>
+  </section>
+  </div>
+
+</main>
+
+<div class="fabs">
+  <button class="fab" id="fab-home" title="Home"><span aria-hidden="true">&#8962;</span><span class="tooltip">Home</span></button>
+  <button class="fab" id="fab-search" title="Search"><span aria-hidden="true">&#128269;</span><span class="tooltip">Search</span></button>
+  <button class="fab" id="fab-print" title="Print"><span aria-hidden="true">&#9096;</span><span class="tooltip">Print</span></button>
+</div>
+
+<div class="print-menu" id="print-menu">
+  <button id="print-current">Print this section</button>
+  <button id="print-all">Print everything</button>
+</div>
+
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <input type="text" id="search-input" placeholder="Search questions..." autocomplete="off">
+    <div class="search-results" id="search-results"></div>
+  </div>
+</div>
+
+<script>
+  /* ---------- router ---------- */
+  const PAGES = ['home','scorecard','c1','c2','c3','c4','c5','c6','ds','c7','c8','c9','c10'];
+  const LABELS = {
+    scorecard:'Scorecard', c1:'1. Communication Skills', c2:'2. Department Basics',
+    c3:'3. Tech Know-How', c4:'4. Network Fundamentals', c5:'5. Latest Trends',
+    c6:'6. Programming Skills', ds:'Data Structures', c7:'7. Coding Style & Optimization',
+    c8:'8. Logical Thinking', c9:'9. Career Aspirations', c10:'10. Candidate Questions'
+  };
+
+  function route(){
+    let hash = location.hash.replace('#','') || 'home';
+    if (!PAGES.includes(hash)) hash = 'home';
+    PAGES.forEach(p => {
+      document.getElementById('page-' + p).classList.toggle('active', p === hash);
+    });
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', route);
+  route();
+
+  /* ---------- scorecard totals ---------- */
+  const marks = document.querySelectorAll('.mark');
+  const total = document.getElementById('total');
+  function updateTotal(){
+    let sum = 0;
+    marks.forEach(m => { const v = parseFloat(m.value); if (!isNaN(v)) sum += v; });
+    total.textContent = sum + ' / 100';
+  }
+  marks.forEach(m => m.addEventListener('input', updateTotal));
+
+  /* ---------- search ---------- */
+  const searchIndex = [];
+  PAGES.filter(p => p !== 'home' && p !== 'scorecard').forEach(p => {
+    document.querySelectorAll('#page-' + p + ' details.q').forEach(d => {
+      const summary = d.querySelector('summary');
+      searchIndex.push({ page: p, text: summary.textContent.trim(), el: d });
+    });
+  });
+
+  const overlay = document.getElementById('search-overlay');
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+
+  function openSearch(){
+    overlay.classList.add('open');
+    searchInput.value = '';
+    renderResults('');
+    setTimeout(() => searchInput.focus(), 30);
+  }
+  function closeSearch(){ overlay.classList.remove('open'); }
+
+  function renderResults(query){
+    const q = query.trim().toLowerCase();
+    const matches = q ? searchIndex.filter(item => item.text.toLowerCase().includes(q)) : [];
+    searchResults.innerHTML = '';
+    if (!q){
+      searchResults.innerHTML = '<div class="search-empty">Type to search all questions across every section.</div>';
+      return;
+    }
+    if (!matches.length){
+      searchResults.innerHTML = '<div class="search-empty">No matches.</div>';
+      return;
+    }
+    matches.slice(0, 30).forEach(item => {
+      const a = document.createElement('a');
+      a.href = '#' + item.page;
+      a.className = 'search-result';
+      a.innerHTML = '<div class="sr-page">' + LABELS[item.page] + '</div><div>' + item.text + '</div>';
+      a.addEventListener('click', () => {
+        closeSearch();
+        setTimeout(() => {
+          item.el.open = true;
+          item.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 60);
+      });
+      searchResults.appendChild(a);
+    });
+  }
+
+  searchInput.addEventListener('input', e => renderResults(e.target.value));
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeSearch(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeSearch(); document.getElementById('print-menu').classList.remove('open'); }
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+  });
+
+  /* ---------- FABs ---------- */
+  document.getElementById('fab-home').addEventListener('click', () => { location.hash = 'home'; });
+  document.getElementById('fab-search').addEventListener('click', openSearch);
+
+  const printMenu = document.getElementById('print-menu');
+  document.getElementById('fab-print').addEventListener('click', () => printMenu.classList.toggle('open'));
+  document.getElementById('print-current').addEventListener('click', () => { printMenu.classList.remove('open'); window.print(); });
+  document.getElementById('print-all').addEventListener('click', () => {
+    printMenu.classList.remove('open');
+    document.body.classList.add('print-all');
+    window.print();
+    setTimeout(() => document.body.classList.remove('print-all'), 800);
+  });
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () {});
+    });
+  }
+</script>
+
+</body>
+</html>
