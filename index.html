@@ -119,6 +119,32 @@
   .anchors div:nth-child(5){border-left-color:var(--band5);background:var(--band5-soft);}
   .anchors div + div{border-top:1px solid var(--paper);}
 
+  .candidate-details{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 16px;
+    margin-bottom:16px;padding:16px;background:var(--line-soft);border-radius:8px;
+  }
+  .candidate-details label{display:flex;flex-direction:column;gap:5px;font-size:.78rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em;}
+  .candidate-details input{
+    font-family:"Public Sans",sans-serif;font-size:.95rem;font-weight:400;text-transform:none;letter-spacing:normal;
+    color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:8px 10px;
+  }
+  .candidate-details input:focus-visible{border-color:var(--focus);}
+
+  .pdf-btn{
+    display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border:none;
+    border-radius:8px;padding:10px 18px;font-family:"Public Sans",sans-serif;font-size:.9rem;font-weight:600;
+    cursor:pointer;margin-top:4px;
+  }
+  .pdf-btn:hover{background:var(--accent-ink);}
+
+  .feedback-label{display:block;margin:18px 0 6px;font-size:.85rem;font-weight:600;color:var(--muted);}
+  .feedback-box{
+    min-height:70px;border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:.92rem;
+    background:var(--panel);color:var(--ink);
+  }
+  .feedback-box:empty::before{content:attr(data-placeholder);color:var(--muted);}
+  .feedback-box:focus-visible{outline:2px solid var(--focus);outline-offset:1px;}
+
   .dept-title{
     margin:24px 0 10px;font-size:1.05rem;font-weight:600;color:var(--accent);
     border-bottom:1px solid var(--line);padding-bottom:6px;
@@ -200,13 +226,21 @@
     header{background:#fff;color:#000;border-bottom:2px solid #000;}
     header::after{display:none;}
     header h1{color:#000;}
-    .fabs, .print-menu, .search-overlay, .back-link{display:none !important;}
+    .fabs, .print-menu, .search-overlay, .back-link, .pdf-btn{display:none !important;}
     details.q{page-break-inside:avoid;}
     details.q:not([open]) summary::before{content:"Q: ";}
     body{background:#fff;}
     .panel{border:none;padding:0;margin-bottom:18px;}
     body.print-all .page{display:block !important;}
     .page:not(.active):not(#page-home){display:none;}
+
+    /* --- compact scorecard record: hide rubric text, keep name + score --- */
+    #scorecard .anchors{display:none;}
+    #scorecard .crit{border:none;page-break-inside:avoid;margin-bottom:2px;}
+    #scorecard .crit-head{background:none;border-bottom:1px solid #ccc;padding:6px 0;}
+    #scorecard .candidate-details{background:none;border:1px solid #ccc;padding:10px 12px;}
+    #scorecard .candidate-details input{border:none;border-bottom:1px solid #999;border-radius:0;padding:2px 0;background:transparent;}
+    #scorecard .feedback-box{border:1px solid #999;min-height:50px;}
   }
 </style>
 </head>
@@ -243,6 +277,15 @@
   <section class="panel" id="scorecard">
     <h2 class="section-title">Interview Scorecard</h2>
     <p class="blurb">Scoring guidelines with behavioural anchors — fill in marks live during the interview, total updates automatically.</p>
+
+    <div class="candidate-details">
+      <label>Candidate Name<input type="text" id="cand-name" placeholder="Full name"></label>
+      <label>Date<input type="date" id="cand-date"></label>
+      <label>Position / Role<input type="text" id="cand-role" placeholder="e.g. Graduate Engineer Trainee"></label>
+      <label>Interviewer<input type="text" id="cand-interviewer" placeholder="Your name"></label>
+    </div>
+    <button class="pdf-btn" id="download-pdf" type="button">&#8681; Download as PDF</button>
+    <p class="blurb" style="margin:6px 0 0;font-size:.8rem;">Opens your browser's print dialog — choose "Save as PDF" as the destination.</p>
 
     <div class="crit">
       <div class="crit-head"><span class="crit-num">1</span><span class="crit-name">Communication Skills</span><input type="number" min="0" max="10" class="mark"><span>/10</span></div>
@@ -357,7 +400,8 @@
     <table class="score" style="margin-top:10px;">
       <tfoot><tr><td style="font-weight:600;">Total</td><td id="total" style="width:130px;">0 / 100</td></tr></tfoot>
     </table>
-    <p class="blurb" style="margin-top:12px;">Feedback or notes if any: ____________________________________________</p>
+    <label class="feedback-label" for="feedback">Feedback / Notes</label>
+    <div class="feedback-box" id="feedback" contenteditable="true" data-placeholder="Type any feedback or notes here..."></div>
   </section>
   </div>
 
@@ -1356,6 +1400,16 @@ void calculateArea(int length, int breadth) { ... }</pre>
   }
   window.addEventListener('hashchange', route);
   route();
+
+  /* ---------- candidate details + PDF download ---------- */
+  const dateField = document.getElementById('cand-date');
+  if (dateField && !dateField.value) {
+    dateField.value = new Date().toISOString().slice(0, 10);
+  }
+  document.getElementById('download-pdf').addEventListener('click', () => {
+    location.hash = 'scorecard';
+    setTimeout(() => window.print(), 50);
+  });
 
   /* ---------- scorecard totals ---------- */
   const marks = document.querySelectorAll('.mark');

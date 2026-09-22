@@ -1,5 +1,5 @@
 // Interview Kit service worker — cache-first, offline shell.
-const CACHE = 'interview-kit-f9745f065f';
+const CACHE = 'interview-kit-f6466cbe46';
 const ASSETS = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (e) => {
